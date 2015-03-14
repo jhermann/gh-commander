@@ -7,7 +7,7 @@ pip==6.0.8
 
 invoke==0.9.0
 rituals==0.1.0
-pylint==1.4.2
+pylint==1.4.3
 bpython==0.13.1
 yolk3k==0.8.6
 
