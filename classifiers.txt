@@ -3,6 +3,11 @@ Development Status :: 2 - Pre-Alpha
 #Development Status :: 3 - Alpha
 #Development Status :: 4 - Beta
 #Development Status :: 5 - Production/Stable
+Environment :: Console
+License :: OSI Approved :: Apache Software License
 Intended Audience :: Developers
 Operating System :: OS Independent
+Topic :: Software Development
+Topic :: Software Development :: Version Control
+Topic :: Utilities
 Programming Language :: Python :: 2.7
