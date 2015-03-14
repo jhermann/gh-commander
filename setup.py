@@ -48,6 +48,7 @@ except ImportError as exc:
 
 # Helpers
 project_root = os.path.abspath(os.path.dirname(__file__))
+package_name = name.replace('-', '_')
 
 def srcfile(*args):
     "Helper for path building."
@@ -78,7 +79,7 @@ def _build_metadata():
     # Handle metadata in package source
     expected_keys = ('url', 'version', 'license', 'author', 'author_email', 'long_description', 'keywords')
     metadata = {}
-    with open(srcfile('src', name, '__init__.py')) as handle:
+    with open(srcfile('src', package_name, '__init__.py')) as handle:
         pkg_init = handle.read()
         # Get default long description from docstring
         metadata['long_description'] = re.search(r'^"""(.+?)^"""$', pkg_init, re.DOTALL|re.MULTILINE).group(1).strip()
@@ -162,6 +163,6 @@ def _build_metadata():
 
 # Ensure "setup.py" is importable by other tools, to access the project's metadata
 project = _build_metadata()
-__all__ = ['project', 'project_root', 'srcfile']
+__all__ = ['project', 'project_root', 'package_name', 'srcfile']
 if __name__ == '__main__':
     setup(**project)
