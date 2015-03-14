@@ -17,7 +17,7 @@ using [click](https://github.com/mitsuhiko/click)
 It allows to access the
 [GitHub API v3](https://developer.github.com/v3/)
 from a shell prompt for things usually done in the browser,
-and also automates otherwise tasks that are tedious at best,
+and also automates tasks that otherwise are tedious at best,
 when done by clicking around on a web page.
 GitHub Commander is powered by [PyGithub](https://github.com/PyGithub/PyGithub).
 
