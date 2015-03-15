@@ -6,8 +6,11 @@ from the CLI and automate otherwise tedious tasks.
 
 ![logo](https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/logo-64.png)
  
-![Apache 2.0 licensed](http://img.shields.io/badge/license-Apache_2.0-red.svg)
-[![Travis CI](https://api.travis-ci.org/jhermann/gh-commander.svg)](https://travis-ci.org/jhermann/gh-commander)
+ [![Travis CI](https://api.travis-ci.org/jhermann/gh-commander.svg)](https://travis-ci.org/jhermann/gh-commander)
+ [![GitHub Issues](https://img.shields.io/github/issues/jhermann/gh-commander.svg)]()
+ [![License](https://img.shields.io/pypi/l/gh-commander.svg)](/jhermann/gh-commander/blob/master/LICENSE)
+ [![Latest Version](https://img.shields.io/pypi/v/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
+ [![Downloads](https://img.shields.io/pypi/dw/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
 
 
 ## Overview
