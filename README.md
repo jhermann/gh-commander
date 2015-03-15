@@ -35,6 +35,11 @@ GitHub Commander is powered by [PyGithub](https://github.com/PyGithub/PyGithub).
 See [Contributing](#contributing) for now.
 
 
+## A Practical Example
+
+**TODO** Bash script that syncs issue labels in all of a user's projects with a master project.
+
+
 ## Usage
 
 Most of the commands are intentionally self-explanatory,
@@ -83,4 +88,4 @@ See [CONTRIBUTING.md](https://github.com/jhermann/gh-commander/blob/master/CONTR
 
 ## Acknowledgements
 
-…
+ * Logo elements from [clker.com Free Clipart](http://www.clker.com/).
