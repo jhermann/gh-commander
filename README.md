@@ -8,7 +8,7 @@ from the CLI and automate otherwise tedious tasks.
  
  [![Travis CI](https://api.travis-ci.org/jhermann/gh-commander.svg)](https://travis-ci.org/jhermann/gh-commander)
  [![GitHub Issues](https://img.shields.io/github/issues/jhermann/gh-commander.svg)]()
- [![License](https://img.shields.io/pypi/l/gh-commander.svg)](/jhermann/gh-commander/blob/master/LICENSE)
+ [![License](https://img.shields.io/pypi/l/gh-commander.svg)](https://github.com/jhermann/gh-commander/blob/master/LICENSE)
  [![Latest Version](https://img.shields.io/pypi/v/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
  [![Downloads](https://img.shields.io/pypi/dw/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
 
