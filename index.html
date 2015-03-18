@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>GitHub Commander by jhermann</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>GitHub Commander</h1>
+        <p>GitHub Commander is a tool to access the GitHub APIv3 from the CLI and automate otherwise tedious tasks.</p>
+        <p class="view"><a href="https://github.com/jhermann/gh-commander">View the Project on GitHub <small>jhermann/gh-commander</small></a></p>
+        <ul>
+          <li><a href="https://github.com/jhermann/gh-commander/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jhermann/gh-commander/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jhermann/gh-commander">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><img src="https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/logo-64.png" alt="logo">
+ 
+ <a href="https://travis-ci.org/jhermann/gh-commander"><img src="https://api.travis-ci.org/jhermann/gh-commander.svg" alt="Travis CI"></a>
+ <a href="https://github.com/jhermann/gh-commander/issues"><img src="https://img.shields.io/github/issues/jhermann/gh-commander.svg" alt="GitHub Issues"></a>
+ <a href="https://github.com/jhermann/gh-commander/blob/master/LICENSE"><img src="https://img.shields.io/pypi/l/gh-commander.svg" alt="License"></a>
+ <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://img.shields.io/pypi/v/gh-commander.svg" alt="Latest Version"></a>
+ <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://img.shields.io/pypi/dw/gh-commander.svg" alt="Downloads"></a></p>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>GitHub Commander implements the <code>gh</code> command line tool,
+which provides a ‘fluent’ interface
+using <a href="https://github.com/mitsuhiko/click">click</a>
+(see <a href="#usage">Usage</a> below).
+It allows to access the
+<a href="https://developer.github.com/v3/">GitHub API v3</a>
+from a shell prompt for things usually done in the browser,
+and also automates tasks that otherwise are tedious at best,
+when done by clicking around on a web page.
+GitHub Commander is powered by <a href="https://github.com/PyGithub/PyGithub">PyGithub</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th><img class="emoji" title=":information_source:" alt=":information_source:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2139.png" height="20" width="20" align="absmiddle"></th>
+<th align="left">Initially, the focus of the project will be to provide task automation, not completeness of covering every API aspect!</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>See <a href="#contributing">Contributing</a> for now.</p>
+
+<h2>
+<a id="a-practical-example" class="anchor" href="#a-practical-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Practical Example</h2>
+
+<p><strong>TODO</strong> Bash script that syncs issue labels in all of a user's projects with a master project.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Most of the commands are intentionally self-explanatory,
+so usually they are just listed without further details,
+in the hope that it's quite obvious what they do.</p>
+
+<h3>
+<a id="general-options" class="anchor" href="#general-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Options</h3>
+
+<ul>
+<li>
+<code>--user ‹account name›</code> – Override account name from config.</li>
+<li>
+<code>--token ‹API token›</code> – Override API token from config.</li>
+<li>
+<code>--site ‹base URL›</code> – Override site URL for on-premise installations of GitHub.</li>
+</ul>
+
+<h3>
+<a id="common-arguments" class="anchor" href="#common-arguments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common Arguments</h3>
+
+<ul>
+<li>
+<code>‹repo›</code> – A repository name, either fully qualified in the form <code>‹account›/‹repo›</code>, or else a plain repository name assumed to be owned by the current user.</li>
+</ul>
+
+<h3>
+<a id="labels" class="anchor" href="#labels" aria-hidden="true"><span class="octicon octicon-link"></span></a>Labels</h3>
+
+<ul>
+<li><code>gh labels list ‹repo›…</code></li>
+<li><code>gh labels export ‹repo› [to] ‹filename›</code></li>
+<li><code>gh labels import ‹repo› [from] ‹filename›</code></li>
+</ul>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>To create a working directory for this project, call these commands:</p>
+
+<div class="highlight highlight-sh"><pre>git clone <span class="pl-s1"><span class="pl-pds">"</span>https://github.com/jhermann/gh-commander.git<span class="pl-pds">"</span></span>
+<span class="pl-s3">cd</span> <span class="pl-s1"><span class="pl-pds">"</span>gh-commander<span class="pl-pds">"</span></span>
+<span class="pl-s3">.</span> .env <span class="pl-c"># answer the prompt with (y)es</span>
+invoke build --docs</pre></div>
+
+<p>See <a href="https://github.com/jhermann/gh-commander/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for more.</p>
+
+<h2>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h2>
+
+<ul>
+<li><a href="https://developer.github.com/v3/">GitHub API v3</a></li>
+<li><a href="https://github.com/PyGithub/PyGithub">PyGithub</a></li>
+<li><a href="https://github.com/mitsuhiko/click">click</a></li>
+</ul>
+
+<h2>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
+
+<ul>
+<li>Logo elements from <a href="http://www.clker.com/">clker.com Free Clipart</a>.</li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/jhermann">jhermann</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
