@@ -42,8 +42,8 @@ def cli(quiet=False, verbose=False): # pylint: disable=unused-argument
     #click.secho('appdir = {0}'.format(appdir), fg='yellow')
 
 
-@cli.command()
-def help():
+@cli.command(name='help')
+def help_command():
     """Print some helpful message."""
     click.echo('Helpful message.')
 
