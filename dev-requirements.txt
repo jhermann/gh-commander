@@ -13,6 +13,7 @@ yolk3k==0.8.6
 pytest==2.6.4
 pytest-spec==0.2.24
 tox==1.8.1
+sh==1.11
 
 twine==1.5.0
 

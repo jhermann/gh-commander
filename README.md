@@ -102,6 +102,7 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 * [PyGithub](https://github.com/PyGithub/PyGithub)
 * [Rituals](https://jhermann.github.io/rituals)
 * [Click](http://click.pocoo.org/)
+* [sh](http://amoffat.github.io/sh/)
 
 
 ## Acknowledgements
