@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-whitespace
 """
-    gh-commander – GitHub Commander is a tool to access the GitHub APIv3
+    GitHub Commander – A tool to access the GitHub APIv3
     from the CLI and automate otherwise tedious tasks.
+
+    “GitHub Commander” implements the ``gh`` command line tool,
+    which provides a ‘fluent’ interface using Click.
+    It allows to access the GitHub API v3 from a shell
+    prompt for things usually done in the browser, and also
+    automates tasks that otherwise are tedious at best,
+    when done by clicking around on a web page.
+
 
     Copyright ©  2015 Jürgen Hermann <jh@web.de>
 
