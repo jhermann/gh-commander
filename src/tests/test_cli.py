@@ -43,7 +43,7 @@ def test_cli_help(cmd):
     result = cmd('--help')
     lines = result.stdout.splitlines()
 
-    assert cmdname in lines[0], "Command name is reported"
+    assert cmdname in lines[0].split(), "Command name is reported"
 
 
 @cli
