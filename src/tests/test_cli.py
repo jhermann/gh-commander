@@ -61,7 +61,7 @@ def test_cli_version(cmd):
 @pytest.mark.integration
 def test_cli_invalid_option(cmd):
     with pytest.raises(UsageError):
-        cmd('--this-is-certain-not-a-supported-option')
+        cmd('--this-is-certainly-not-a-supported-option')
 
 
 @pytest.mark.cli
