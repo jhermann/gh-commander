@@ -31,13 +31,19 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 """
+
+# Project data (the rest is parsed from __init__.py and other project files)
+name = 'gh-commander'
+package_name = 'gh_commander'
+
+# ~~~ BEGIN springerle/py-generic-project ~~~
+# Stdlib imports
 import os
 import re
 import sys
+import textwrap
+from codecs import open # pylint: disable=redefined-builtin
 from collections import defaultdict
-
-# Project data (the rest is parsed from __init__.py and other project files)
-name = __doc__.strip().split(None, 1)[0]
 
 # Import setuptools
 try:
@@ -48,7 +54,6 @@ except ImportError as exc:
 
 # Helpers
 project_root = os.path.abspath(os.path.dirname(__file__))
-package_name = name.replace('-', '_')
 
 def srcfile(*args):
     "Helper for path building."
@@ -79,10 +84,10 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
     # Handle metadata in package source
     expected_keys = ('url', 'version', 'license', 'author', 'author_email', 'long_description', 'keywords')
     metadata = {}
-    with open(srcfile('src', package_name, '__init__.py')) as handle:
+    with open(srcfile('src', package_name, '__init__.py'), encoding='utf-8') as handle:
         pkg_init = handle.read()
         # Get default long description from docstring
-        metadata['long_description'] = re.search(r'^"""(.+?)^"""$', pkg_init, re.DOTALL|re.MULTILINE).group(1).strip()
+        metadata['long_description'] = re.search(r'^"""(.+?)^"""$', pkg_init, re.DOTALL|re.MULTILINE).group(1)
         for line in pkg_init.splitlines():
             match = re.match(r"""^__({0})__ += (?P<q>['"])(.+?)(?P=q)$""".format('|'.join(expected_keys)), line)
             if match:
@@ -90,6 +95,12 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
 
     if not all(i in metadata for i in expected_keys):
         raise RuntimeError("Missing or bad metadata in '{0}' package".format(name))
+
+    text = metadata['long_description'].strip()
+    if text:
+        metadata['description'], text = text.split('.', 1)
+        metadata['description'] = ' '.join(metadata['description'].split()).strip() # normalize whitespace
+        metadata['long_description'] = textwrap.dedent(text).strip()
     metadata['keywords'] = metadata['keywords'].replace(',', ' ').strip().split()
 
     # Load requirements files
@@ -102,7 +113,7 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
     for key, filename in requirements_files.items():
         requires[key] = []
         if os.path.exists(srcfile(filename)):
-            with open(srcfile(filename), 'r') as handle:
+            with open(srcfile(filename), encoding='utf-8') as handle:
                 for line in handle:
                     line = line.strip()
                     if line and not line.startswith('#'):
@@ -119,7 +130,7 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
         if '__main__.py' in files:
             path = path[len(srcfile('src') + os.sep):]
             appname = path.split(os.sep)[-1]
-            with open(srcfile('src', path, '__main__.py')) as handle:
+            with open(srcfile('src', path, '__main__.py'), encoding='utf-8') as handle:
                 for line in handle.readlines():
                     match = re.match(r"""^__app_name__ += (?P<q>['"])(.+?)(?P=q)$""", line)
                     if match:
@@ -142,14 +153,12 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
     for classifiers_txt in ('classifiers.txt', 'project.d/classifiers.txt'):
         classifiers_txt = srcfile(classifiers_txt)
         if os.path.exists(classifiers_txt):
-            with open(classifiers_txt, 'r') as handle:
+            with open(classifiers_txt, encoding='utf-8') as handle:
                 classifiers = [i.strip() for i in handle if i.strip() and not i.startswith('#')]
             break
 
     metadata.update(dict(
         name = name,
-        description = ' '.join(metadata['long_description'].split('.')[0].split()), # normalize whitespace
-        url = metadata['url'],
         package_dir = {'': 'src'},
         packages = find_packages(srcfile('src'), exclude=['tests']),
         data_files = data_files.items(),
