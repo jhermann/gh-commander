@@ -90,6 +90,7 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
 
     if not all(i in metadata for i in expected_keys):
         raise RuntimeError("Missing or bad metadata in '{0}' package".format(name))
+    metadata['keywords'] = metadata['keywords'].replace(',', ' ').strip().split()
 
     # Load requirements files
     requirements_files = dict(
