@@ -1,6 +1,6 @@
 # *- coding: utf-8 -*-
-# pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-# pylint: disable=redefined-outer-name
+# pylint: disable=wildcard-import, unused-wildcard-import, missing-docstring
+# pylint: disable=redefined-outer-name, no-self-use, bad-continuation
 """ Test '__main__' CLI stub.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
@@ -23,6 +23,7 @@ import sys
 import sh
 import pytest
 
+from markers import *
 from gh_commander import __version__ as version
 from gh_commander.__main__ import __app_name__ as cmdname
 
@@ -36,8 +37,8 @@ def cmd():
     return sh.Command(cmdname)
 
 
-@pytest.mark.cli
-@pytest.mark.integration
+@cli
+@integration
 def test_cli_help(cmd):
     result = cmd('--help')
     lines = result.stdout.splitlines()
@@ -45,8 +46,8 @@ def test_cli_help(cmd):
     assert cmdname in lines[0], "Command name is reported"
 
 
-@pytest.mark.cli
-@pytest.mark.integration
+@cli
+@integration
 def test_cli_version(cmd):
     result = cmd('--version')
     reported_version = result.stdout.split()[1]
@@ -57,15 +58,15 @@ def test_cli_version(cmd):
     assert py_version in result.stdout, "Python version is reported"
 
 
-@pytest.mark.cli
-@pytest.mark.integration
+@cli
+@integration
 def test_cli_invalid_option(cmd):
     with pytest.raises(UsageError):
         cmd('--this-is-certainly-not-a-supported-option')
 
 
-@pytest.mark.cli
-@pytest.mark.integration
+@cli
+@integration
 def test_cli_invalid_sub_command(cmd):
     with pytest.raises(UsageError):
         cmd.sub_command_that_does_not_exist()
