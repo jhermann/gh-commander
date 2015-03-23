@@ -36,8 +36,8 @@ def tox(verbose=False, env_list='', opts=''):
 
 @task(help={
     'pty': "Whether to run commands under a pseudo-tty",
-})
-def ci(pty=True): # pylint: disable=invalid-name
+}) # pylint: disable=invalid-name
+def ci(pty=True):
     """Perform continuous integration tasks."""
     opts = ['']
 
