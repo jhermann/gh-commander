@@ -14,9 +14,8 @@ from rituals.invoke_tasks import * # pylint: disable=redefined-builtin
     'verbose': "Make 'tox' more talkative",
     'env-list': "Override list of environments to use (e.g. 'py27,py34')",
     'opts': "Extra flags for tox",
-    'pty': "Whether to run tox under a pseudo-tty",
 })
-def tox(verbose=False, env_list='', opts='', pty=True):
+def tox(verbose=False, env_list='', opts=''):
     """Perform multi-environment tests."""
     snakepits = ['/opt/pyenv/bin'] # TODO: config value
     cmd = []
@@ -38,4 +37,12 @@ def tox(verbose=False, env_list='', opts='', pty=True):
 @task
 def ci(): # pylint: disable=invalid-name
     """Perform continuous integration tasks."""
-    run("invoke clean --all build --docs test check --reports tox 2>&1", echo=True)
+    opts = ['']
+
+    # 'tox' makes no sense in Travis
+    if os.environ.get('TRAVIS', '').lower() == 'true':
+        opts += ['test']
+    else:
+        opts += ['tox']
+
+    run("invoke clean --all build --docs check --reports{} 2>&1".format(' '.join(opts)), echo=True)
