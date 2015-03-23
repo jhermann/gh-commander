@@ -34,8 +34,10 @@ def tox(verbose=False, env_list='', opts=''):
     run(' '.join(cmd), echo=True)
 
 
-@task
-def ci(): # pylint: disable=invalid-name
+@task(help={
+    'pty': "Whether to run commands under a pseudo-tty",
+})
+def ci(pty=True): # pylint: disable=invalid-name
     """Perform continuous integration tasks."""
     opts = ['']
 
@@ -45,4 +47,4 @@ def ci(): # pylint: disable=invalid-name
     else:
         opts += ['tox']
 
-    run("invoke clean --all build --docs check --reports{} 2>&1".format(' '.join(opts)), echo=True)
+    run("invoke clean --all build --docs check --reports{} 2>&1".format(' '.join(opts)), echo=True, pty=pty)
