@@ -75,7 +75,8 @@ To create a working directory for this project, call these commands:
 git clone "https://github.com/jhermann/gh-commander.git"
 cd "gh-commander"
 . .env --yes --develop
-invoke build --docs test check
+# export TOXENV=py27,py33
+invoke ci
 ```
 
 See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBUTING.md) for more.
