@@ -41,7 +41,7 @@ def cmd():
 @integration
 def test_cli_help(cmd):
     result = cmd('--help')
-    lines = result.stdout.splitlines()
+    lines = result.stdout.decode('ascii').splitlines()
 
     assert cmdname in lines[0].split(), "Command name is reported"
 
@@ -50,12 +50,13 @@ def test_cli_help(cmd):
 @integration
 def test_cli_version(cmd):
     result = cmd('--version')
-    reported_version = result.stdout.split()[1]
+    stdout = result.stdout.decode('ascii')
+    reported_version = stdout.split()[1]
     py_version = sys.version.split()[0]
 
-    assert version in result.stdout, "Version string contains version"
+    assert version in stdout, "Version string contains version"
     assert reported_version[:len(version)] == version, "Version is 2nd field"
-    assert py_version in result.stdout, "Python version is reported"
+    assert py_version in stdout, "Python version is reported"
 
 
 @cli
