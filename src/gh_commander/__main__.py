@@ -21,8 +21,6 @@ import sys
 
 import click
 
-from . import __version__
-
 
 __app_name__ = 'gh'
 CONTEXT_SETTINGS = dict(
@@ -31,15 +29,13 @@ CONTEXT_SETTINGS = dict(
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
-@click.version_option(#version=__version__, prog_name=__app_name__,
-    message='%(prog)s %(version)s [Python {}]'.format(' '.join(sys.version.split())),
-)
+@click.version_option(message='%(prog)s %(version)s [Python {}]'.format(' '.join(sys.version.split())),)
 @click.option('-q', '--quiet', is_flag=True, default=False, help='Be quiet (show only errors).')
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Create extra verbose output.')
-def cli(quiet=False, verbose=False): # pylint: disable=unused-argument
+def cli(quiet=False, verbose=False):  # pylint: disable=unused-argument
     """'gh' command line tool."""
-    appdir = click.get_app_dir(__app_name__)
-    #click.secho('appdir = {0}'.format(appdir), fg='yellow')
+    appdir = click.get_app_dir(__app_name__)  # noqa
+    # click.secho('appdir = {0}'.format(appdir), fg='yellow')
 
 
 @cli.command(name='help')
@@ -48,6 +44,6 @@ def help_command():
     click.echo('Helpful message.')
 
 
-if __name__ == "__main__": # imported via "python -m"?
-    __package__ = 'gh_commander' # pylint: disable=redefined-builtin
-    cli() # pylint: disable=no-value-for-parameter
+if __name__ == "__main__":  # imported via "python -m"?
+    __package__ = 'gh_commander'  # pylint: disable=redefined-builtin
+    cli()  # pylint: disable=no-value-for-parameter

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-whitespace
+# flake8: noqa
 """
     GitHub Commander – A tool to access the GitHub APIv3
     from the CLI and automate otherwise tedious tasks.

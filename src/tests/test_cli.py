@@ -28,7 +28,7 @@ from gh_commander import __version__ as version
 from gh_commander.__main__ import __app_name__ as cmdname
 
 
-UsageError = sh.ErrorReturnCode_2 # pylint: disable=no-member
+UsageError = sh.ErrorReturnCode_2  # pylint: disable=no-member
 
 
 @pytest.fixture
