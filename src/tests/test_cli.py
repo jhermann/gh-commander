@@ -2,6 +2,8 @@
 # pylint: disable=wildcard-import, unused-wildcard-import, missing-docstring
 # pylint: disable=redefined-outer-name, no-self-use, bad-continuation
 """ Test '__main__' CLI stub.
+
+    See http://click.pocoo.org/3/testing/
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
 #
@@ -22,10 +24,11 @@ import sys
 
 import sh
 import pytest
+from click.testing import CliRunner
 
 from markers import *
 from gh_commander import __version__ as version
-from gh_commander.__main__ import __app_name__ as cmdname
+from gh_commander import __main__ as main
 
 
 UsageError = sh.ErrorReturnCode_2  # pylint: disable=no-member
@@ -34,7 +37,7 @@ UsageError = sh.ErrorReturnCode_2  # pylint: disable=no-member
 @pytest.fixture
 def cmd():
     """Command fixture."""
-    return sh.Command(cmdname)
+    return sh.Command(main.__app_name__)
 
 
 @cli
@@ -43,7 +46,7 @@ def test_cli_help(cmd):
     result = cmd('--help')
     lines = result.stdout.decode('ascii').splitlines()
 
-    assert cmdname in lines[0].split(), "Command name is reported"
+    assert main.__app_name__ in lines[0].split(), "Command name is reported"
 
 
 @cli
@@ -71,3 +74,21 @@ def test_cli_invalid_option(cmd):
 def test_cli_invalid_sub_command(cmd):
     with pytest.raises(UsageError):
         cmd.sub_command_that_does_not_exist()
+
+
+@cli
+def test_cmd_missing(cmd):
+    runner = CliRunner()
+    result = runner.invoke(main.cli)
+
+    assert result.exit_code == 0
+
+
+@cli
+def test_cmd_help(cmd):
+    runner = CliRunner()
+    result = runner.invoke(main.help_command)
+    word1 = result.output.split()[0]
+
+    assert result.exit_code == 0
+    assert word1 == 'Helpful', "Helpful message is printed"

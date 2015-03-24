@@ -34,7 +34,7 @@ CONTEXT_SETTINGS = dict(
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Create extra verbose output.')
 def cli(quiet=False, verbose=False):  # pylint: disable=unused-argument
     """'gh' command line tool."""
-    appdir = click.get_app_dir(__app_name__)  # noqa
+    appdir = click.get_app_dir(__app_name__)  # noqa  pragma: no cover
     # click.secho('appdir = {0}'.format(appdir), fg='yellow')
 
 
