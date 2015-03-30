@@ -34,14 +34,13 @@ CONTEXT_SETTINGS = dict(
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Create extra verbose output.')
 def cli(quiet=False, verbose=False):  # pylint: disable=unused-argument
     """'gh' command line tool."""
-    appdir = click.get_app_dir(__app_name__)  # noqa  pragma: no cover
-    # click.secho('appdir = {0}'.format(appdir), fg='yellow')
 
 
 @cli.command(name='help')
 def help_command():
     """Print some helpful message."""
-    click.echo('Helpful message.')
+    appdir = click.get_app_dir(__app_name__)  # noqa  pragma: no cover
+    click.secho('The configuration can be found at {0}'.format(appdir), fg='white', bg='blue', bold=True)
 
 
 if __name__ == "__main__":  # imported via "python -m"?
