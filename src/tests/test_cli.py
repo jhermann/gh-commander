@@ -20,6 +20,7 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
 import sys
 
 import sh
@@ -88,7 +89,8 @@ def test_cmd_missing():
 def test_cmd_help():
     runner = CliRunner()
     result = runner.invoke(main.help_command)
-    word1 = result.output.split()[0]
+    words = result.output.split()
 
     assert result.exit_code == 0
-    assert word1 == 'Helpful', "Helpful message is printed"
+    assert 'configuration' in words
+    assert words[-1].endswith(os.sep + main.__app_name__)
