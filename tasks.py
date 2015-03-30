@@ -2,6 +2,19 @@
 # pylint: disable=wildcard-import, unused-wildcard-import, bad-continuation
 """ Project automation for Invoke.
 """
+# Copyright ©  2015 Jürgen Hermann <jh@web.de>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 from __future__ import absolute_import, unicode_literals
 
 import os
@@ -9,18 +22,18 @@ import shutil
 import tempfile
 
 from invoke import run, task
-from rituals.invoke_tasks import * # pylint: disable=redefined-builtin
+from rituals.invoke_tasks import *  # pylint: disable=redefined-builtin
 
 
-@task(name='moar-cookies',
+@task(name='fresh-cookies',
     help={
         'mold': "git URL or directory to use for the refresh",
     },
 )
-def moar_cookies(mold=''):
+def fresh_cookies(mold=''):
     """Refresh the project from the original cookiecutter template."""
-    mold = mold or "https://github.com/Springerle/py-generic-project.git"
-    tmpdir = os.path.join(tempfile.gettempdir(), "moar-gh-commander")
+    mold = mold or "https://github.com/Springerle/py-generic-project.git"  # TODO: URL from config
+    tmpdir = os.path.join(tempfile.gettempdir(), "cc-upgrade-gh-commander")
 
     if os.path.isdir('.git'):
         # TODO: Ensure there are no local unstashed changes
@@ -46,32 +59,8 @@ def moar_cookies(mold=''):
 
 
 @task(help={
-    'verbose': "Make 'tox' more talkative",
-    'env-list': "Override list of environments to use (e.g. 'py27,py34')",
-    'opts': "Extra flags for tox",
-})
-def tox(verbose=False, env_list='', opts=''):
-    """Perform multi-environment tests."""
-    snakepits = ['/opt/pyenv/bin'] # TODO: config value
-    cmd = []
-
-    snakepits = [i for i in snakepits if os.path.isdir(i)]
-    if snakepits:
-        cmd += ['PATH="{}:$PATH"'.format(os.pathsep.join(snakepits),)]
-
-    cmd += ['tox']
-    if verbose:
-        cmd += ['-v']
-    if env_list:
-        cmd += ['-e', env_list]
-    cmd += opts
-    cmd += ['2>&1']
-    run(' '.join(cmd), echo=True)
-
-
-@task(help={
     'pty': "Whether to run commands under a pseudo-tty",
-}) # pylint: disable=invalid-name
+})  # pylint: disable=invalid-name
 def ci(pty=True):
     """Perform continuous integration tasks."""
     opts = ['']
