@@ -28,6 +28,7 @@ __app_name__ = 'gh'
 CONTEXT_SETTINGS = dict(
     help_option_names=['-h', '--help'],
 )
+
 try:
     CLI_PATH = sys.modules['__main__'].__file__
 except (KeyError, AttributeError):
@@ -35,10 +36,9 @@ except (KeyError, AttributeError):
 CLI_PATH = os.path.dirname(CLI_PATH)
 if CLI_PATH.endswith('/bin'):
     CLI_PATH = CLI_PATH[:-4]
-VERSION_INFO = '%(prog)s %(version)s from {} [Python {}]'.format(
-    re.sub('^' + os.path.expanduser('~'), '~', CLI_PATH),
-    ' '.join(sys.version.split()[:1]),
-)
+CLI_PATH = re.sub('^' + os.path.expanduser('~'), '~', CLI_PATH)
+
+VERSION_INFO = '%(prog)s %(version)s from {} [Python {}]'.format(CLI_PATH, ' '.join(sys.version.split()[:1]),)
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
