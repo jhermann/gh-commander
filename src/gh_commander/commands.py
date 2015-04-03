@@ -100,12 +100,13 @@ def help_command(ctx):
 
 
 @config.cli.group()
-def show():
-    """Dump information about various GitHub objects."""
+def user():
+    """Managing GitHub user accounts."""
 
-@show.command()
+
+@user.command(name='show')
 @click.argument('username', nargs=-1)
-def user(username=None):
+def user_show(username=None):
     """Dump information about the logged-in user."""
     api = github.api(config=None)  # TODO: config object
 
