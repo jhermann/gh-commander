@@ -88,9 +88,9 @@ in the hope that it's quite obvious what they do.
 
 ### Labels
 
- * ``gh labels list ‹repo›…``
- * ``gh labels export ‹repo› [to] ‹filename›``
- * ``gh labels import ‹repo› [from] ‹filename›``
+ * :soon: ``gh labels list ‹repo›…``
+ * :soon: ``gh labels export ‹repo› [to] ‹filename›``
+ * :soon: ``gh labels import ‹repo› [from] ‹filename›``
 
 
 ### Users
