@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=bad-continuation
+# pylint: disable=bad-continuation, too-few-public-methods
 """ CLI commands.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
@@ -22,7 +22,7 @@ import re
 
 import click
 
-from . import config
+from . import config, github
 
 
 def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
@@ -30,6 +30,14 @@ def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~'
     path = _home_re.sub('~' + os.sep, path)
     return path
 
+
+class AttributeMapping(object):
+    """Access attributes of an object via the mapping protocol."""
+    def __init__(self, obj):
+        self._obj = obj
+
+    def __getitem__(self, key, default=None):
+        return getattr(self._obj, key, default)
 
 
 @config.cli.command(name='help')
@@ -53,3 +61,27 @@ def help_command(ctx):
 
     #click.echo('\ncontext = {}'.format(repr(vars(ctx))))
     #click.echo('\nparent = {}'.format(repr(vars(ctx.parent))))
+
+
+@config.cli.group()
+def show():
+    """Dump information about various GitHub objects."""
+
+@show.command()
+@click.argument('username', nargs=-1)
+def user(username=None):
+    """Dump information about the logged-in user."""
+    api = github.api()
+    for username in username or [api.gh_config.user]:
+        gh_user = api.get_user(username)
+        userdict = AttributeMapping(gh_user)
+        click.echo("ACCOUNT     %(name)s [%(login)s / %(type)s #%(id)s]" % userdict)
+        click.echo("SINCE/LAST  %(created_at)s / %(updated_at)s" % userdict)
+        click.echo("URL         %(url)s" % userdict)
+        if user.email:
+            click.echo("EMAIL       %(email)s" % userdict)
+        if user.location:
+            click.echo("LOCATION    %(location)s" % userdict)
+        click.echo("REPOS/GISTS %(public_repos)s ☑ ⎇  / %(private_repos)s ☒ ⎇  "
+                   "/ %(public_gists)s ☑ ✍ / %(private_gists)s ☒ ✍" % userdict)
+        click.echo("STATS       ⇦ ⋮ %(followers)s / ⇨ ⋮ %(following)s / %(disk_usage)s ◔" % userdict)
