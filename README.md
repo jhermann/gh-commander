@@ -112,6 +112,8 @@ invoke ci
 
 See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBUTING.md) for more.
 
+[![Throughput Graph](https://graphs.waffle.io/jhermann/gh-commander/throughput.svg)](https://waffle.io/jhermann/gh-commander/metrics)
+
 
 ## References
 
