@@ -47,9 +47,33 @@ CLI_PATH = re.sub('^' + os.path.expanduser('~'), '~', CLI_PATH)
 VERSION_INFO = '%(prog)s %(version)s from {} [Python {}]'.format(CLI_PATH, ' '.join(sys.version.split()[:1]),)
 
 
+# `--license` option decorator
+def license_option(*param_decls, **attrs):
+    """``--license`` option that prints license information and then exits."""
+    def decorator(f):
+        def callback(ctx, param, value):
+            if not value or ctx.resilient_parsing:
+                return
+
+            from . import __doc__ as license
+            license = re.sub(r"``([^`]+?)``", lambda m: click.style(m.group(1), bold=True), license)
+            click.echo(license)
+            ctx.exit()
+
+        attrs.setdefault('is_flag', True)
+        attrs.setdefault('expose_value', False)
+        attrs.setdefault('is_eager', True)
+        attrs.setdefault('help', 'Show the license and exit.')
+        attrs['callback'] = callback
+        return click.option(*(param_decls or ('--license',)), **attrs)(f)
+
+    return decorator
+
+
 # Main command (root)
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option(message=VERSION_INFO)
+@license_option()
 @click.option('-q', '--quiet', is_flag=True, default=False, help='Be quiet (show only errors).')
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Create extra verbose output.')
 @click.option('-c', '--config', metavar='FILE', multiple=True, type=click.Path(), help='Load given configuration file.')
