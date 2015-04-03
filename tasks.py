@@ -68,7 +68,7 @@ def ci(ctx, pty=True):
 
     # 'tox' makes no sense in Travis
     if os.environ.get('TRAVIS', '').lower() == 'true':
-        opts += ['test.test']
+        opts += ['test']
     else:
         opts += ['test.tox']
 
