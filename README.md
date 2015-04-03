@@ -50,7 +50,7 @@ most importantly credentials for API access. The recommended way for doing so is
 
  1. In the [Settings › Applications](https://github.com/settings/applications) of your GitHub account,
     press the “Generate new token” button of the “Personal access tokens” section, and follow the instructions.
-    Copy the generated key to the clipboard, for use in the next step.
+    Copy the generated token to the clipboard, for use in the next step.
  2. Create the file ``~/.netrc`` with the following contents (or add that to the existing file):
 
         machine api.github.com
