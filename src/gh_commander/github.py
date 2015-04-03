@@ -19,11 +19,10 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import errno
 from netrc import netrc
-from urlparse import urlparse
 
 from github import *  # pylint: disable=wildcard-import
 
-from ._compat import iteritems
+from ._compat import iteritems, urlparse
 
 
 def pretty_cause(cause, prefix=None):
