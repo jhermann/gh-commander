@@ -17,6 +17,7 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import errno
 from netrc import netrc
 from urlparse import urlparse
 
@@ -82,7 +83,13 @@ class GitHubConfig(object):
 
     def _get_auth_from_netrc(self, hostname):
         """Try to find login auth in ``~/.netrc``."""
-        hostauth = netrc(self.NETRC_FILE)
+        try:
+            hostauth = netrc(self.NETRC_FILE)
+        except IOError as cause:
+            if cause.errno != errno.ENOENT:
+                raise
+            return
+
         auth = None
         if self.user:
             # Try to find specific `user@host` credentials
