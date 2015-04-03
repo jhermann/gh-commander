@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=bad-continuation, too-few-public-methods
+# pylint: disable=bad-continuation, too-few-public-methods, unused-wildcard-import
 """ GitHub API helpers.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
@@ -20,7 +20,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 from netrc import netrc
 from urlparse import urlparse
 
-from github import *  # pylint: disable=
+from github import *  # pylint: disable=wildcard-import
 
 from ._compat import iteritems
 

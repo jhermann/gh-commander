@@ -87,7 +87,7 @@ def help_command(ctx):
         try:
             dump_user(api, api.gh_config.user)
         except github.BadCredentialsException as cause:
-           click.secho(github.pretty_cause(cause, "API"), fg='white', bg='red', bold=True)
+            click.secho(github.pretty_cause(cause, "API"), fg='white', bg='red', bold=True)
 
     banner('More Help')
     click.echo("Call '{} --help' to get a list of available commands & options.".format(app_name))
