@@ -110,5 +110,7 @@ def user_show(username=None):
     """Dump information about the logged-in user."""
     api = github.api(config=None)  # TODO: config object
 
-    for username in username or [api.gh_config.user]:
+    for idx, username in enumerate(username or [api.gh_config.user]):
+        if idx:
+            click.echo('')
         dump_user(api, username)
