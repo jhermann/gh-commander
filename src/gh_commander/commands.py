@@ -42,7 +42,7 @@ def help_command(ctx):
     click.echo('')
     click.echo(config.version_info(ctx))
 
-    locations = config.locations(exists=False, extras=ctx.find_root().params['config'])
+    locations = config.locations(exists=False, extras=ctx.find_root().params.get('config', None))
     locations = [(u'✔' if os.path.exists(i) else u'✘', pretty_path(i)) for i in locations]
     click.echo(u'\nThe following configuration files are merged in order, if they exist:\n    {0}'.format(
         u'\n    '.join(u'{}   {}'.format(*i) for i in locations),

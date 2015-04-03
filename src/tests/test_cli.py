@@ -90,8 +90,13 @@ def test_cmd_missing():
 def test_cmd_help():
     runner = CliRunner()
     result = runner.invoke(commands.help_command)
+    if result.exit_code:
+        print(vars(result))
+        print('~' * 78)
+        print(result.output_bytes)
+        print('~' * 78)
     words = result.output.split()
 
     assert result.exit_code == 0
     assert 'configuration' in words
-    assert words[-1].endswith(os.sep + main.__app_name__)
+    assert any(i.endswith(os.sep + main.__app_name__ + os.sep + 'config.ini') for i in words)
