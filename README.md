@@ -93,6 +93,11 @@ in the hope that it's quite obvious what they do.
  * ``gh labels import ‹repo› [from] ‹filename›``
 
 
+### Users
+
+ * ``gh user show [‹username›…]``
+
+
 ## Contributing
 
 To create a working directory for this project, call these commands:
