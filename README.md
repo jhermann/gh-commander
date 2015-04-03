@@ -17,7 +17,7 @@ from the CLI and automate otherwise tedious tasks.
 
 ## Overview
 
-GitHub Commander implements the ``gh`` command line tool,
+*GitHub Commander* implements the ``gh`` command line tool,
 which provides a ‘fluent’ interface
 using [click](https://github.com/mitsuhiko/click)
 (see [Usage](#usage) below).
@@ -40,6 +40,32 @@ See [Contributing](#contributing) for now.
 ## A Practical Example
 
 **TODO** Bash script that syncs issue labels in all of a user's projects with a master project.
+
+
+## Configuration
+
+### Login Credentials
+Before you can use *GitHub Commander*, you have to provide some minimal configuration,
+most importantly credentials for API access. The recommended way for doing so is this:
+
+ 1. In the (Settings › Applications)[https://github.com/settings/applications] of your GitHub account,
+    press the “Generate new token” button of the “Personal access tokens” section, and follow the instructions.
+    Copy the generated key to the clipboard, for use in the next step.
+ 2. Create the file ``~/.netrc`` with the following contents (or add that to the existing file):
+```sh
+machine api.github.com
+    user «your GitHub username»
+    password token
+    account «your personal access token»
+```
+ 3. Call ``chmod 600 ~/.netrc`` to protect your sensitive data.
+
+This way, the sensitive authentication information is separate from the rest of the configuration.
+
+
+### Main Configuration File
+
+**TODO**
 
 
 ## Usage
