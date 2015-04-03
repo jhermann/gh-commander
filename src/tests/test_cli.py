@@ -30,6 +30,7 @@ from click.testing import CliRunner
 from markers import *
 from gh_commander import __version__ as version
 from gh_commander import __main__ as main
+from gh_commander import commands
 
 
 UsageError = sh.ErrorReturnCode_2  # pylint: disable=no-member
@@ -88,7 +89,7 @@ def test_cmd_missing():
 @cli
 def test_cmd_help():
     runner = CliRunner()
-    result = runner.invoke(main.help_command)
+    result = runner.invoke(commands.help_command)
     words = result.output.split()
 
     assert result.exit_code == 0
