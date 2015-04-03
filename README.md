@@ -52,12 +52,12 @@ most importantly credentials for API access. The recommended way for doing so is
     press the “Generate new token” button of the “Personal access tokens” section, and follow the instructions.
     Copy the generated key to the clipboard, for use in the next step.
  2. Create the file ``~/.netrc`` with the following contents (or add that to the existing file):
-```sh
-machine api.github.com
-    user «your GitHub username»
-    password token
-    account «your personal access token»
-```
+
+        machine api.github.com
+            user «your GitHub username»
+            password token
+            account «your personal access token»
+
  3. Call ``chmod 600 ~/.netrc`` to protect your sensitive data.
 
 This way, the sensitive authentication information is separate from the rest of the configuration.
