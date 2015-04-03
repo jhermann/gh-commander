@@ -48,7 +48,7 @@ See [Contributing](#contributing) for now.
 Before you can use *GitHub Commander*, you have to provide some minimal configuration,
 most importantly credentials for API access. The recommended way for doing so is this:
 
- 1. In the (Settings › Applications)[https://github.com/settings/applications] of your GitHub account,
+ 1. In the [Settings › Applications](https://github.com/settings/applications) of your GitHub account,
     press the “Generate new token” button of the “Personal access tokens” section, and follow the instructions.
     Copy the generated key to the clipboard, for use in the next step.
  2. Create the file ``~/.netrc`` with the following contents (or add that to the existing file):
