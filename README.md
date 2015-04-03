@@ -36,6 +36,18 @@ GitHub Commander is powered by [PyGithub](https://github.com/PyGithub/PyGithub).
 
 See [Contributing](#contributing) for now.
 
+To add bash completion, read the [Click docs](http://click.pocoo.org/4/bashcomplete/#activation) about it,
+or just follow these instructions:
+
+```sh
+cmdname=gh
+mkdir -p ~/.bash_completion.d
+_$(tr a-z A-Z <<<"$cmdname")_COMPLETE=source $cmdname >~/.bash_completion.d/$cmdname.sh
+grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
+    || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
+. "/etc/bash_completion"
+```
+
 
 ## A Practical Example
 
