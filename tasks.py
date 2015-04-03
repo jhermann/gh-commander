@@ -56,6 +56,8 @@ def fresh_cookies(ctx, mold=''):
     if os.path.exists('.git'):
         ctx.run("git status", echo=True)
 
+namespace.add_task(fresh_cookies)
+
 
 @task(help={
     'pty': "Whether to run commands under a pseudo-tty",
@@ -66,8 +68,10 @@ def ci(ctx, pty=True):
 
     # 'tox' makes no sense in Travis
     if os.environ.get('TRAVIS', '').lower() == 'true':
-        opts += ['test']
+        opts += ['test.test']
     else:
-        opts += ['tox']
+        opts += ['test.tox']
 
     ctx.run("invoke clean --all build --docs check --reports{} 2>&1".format(' '.join(opts)), echo=True, pty=pty)
+
+namespace.add_task(ci)
