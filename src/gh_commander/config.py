@@ -18,24 +18,36 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import os
+import re
 import sys
 
 import click
 
 from ._compat import iteritems
 
+# Determine path this command is located in (installed to)
+try:
+    CLI_PATH = sys.modules['__main__'].__file__
+except (KeyError, AttributeError):
+    CLI_PATH = __file__
+CLI_PATH = os.path.dirname(CLI_PATH)
+if CLI_PATH.endswith('/bin'):
+    CLI_PATH = CLI_PATH[:-4]
+CLI_PATH = re.sub('^' + os.path.expanduser('~'), '~', CLI_PATH)
+
+# Extended version info for use by `click.version_option`
+VERSION_INFO = '%(prog)s %(version)s from {} [Python {}]'.format(CLI_PATH, ' '.join(sys.version.split()[:1]),)
 
 # These will be filled by `__main__`
 APP_NAME = None
-cli = None
+cli = None  # pylint: disable=invalid-name
 
 
 def version_info(ctx=None):
     """Return version information just like --version does."""
-    from .__main__ import VERSION_INFO, __app_name__, __name__ as main_name
     from . import __version__
 
-    prog = ctx.find_root().info_name if ctx else __app_name__
+    prog = ctx.find_root().info_name if ctx else APP_NAME
     version = __version__
     try:
         import pkg_resources
@@ -44,8 +56,8 @@ def version_info(ctx=None):
     else:
         for dist in pkg_resources.working_set:
             scripts = dist.get_entry_map().get('console_scripts') or {}
-            for script_name, entry_point in iteritems(scripts):
-                if entry_point.module_name == main_name:
+            for _, entry_point in iteritems(scripts):
+                if entry_point.module_name == (__package__ + '.__main__'):
                     version = dist.version
                     break
 

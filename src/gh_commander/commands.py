@@ -19,14 +19,13 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import re
-import sys
 
 import click
 
 from . import config
 
 
-def pretty_path(path, _home_re = re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
+def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
     """Prettify path for humans."""
     path = _home_re.sub('~' + os.sep, path)
     return path
