@@ -20,7 +20,23 @@ from __future__ import absolute_import, unicode_literals, print_function
 from netrc import netrc
 from urlparse import urlparse
 
-from github import Github as GitHub
+from github import *  # pylint: disable=
+
+from ._compat import iteritems
+
+
+def pretty_cause(cause, prefix=None):
+    """Format a GitHub exception nicely."""
+    data = cause.data.copy()
+    doc_url = data.pop('documentation_url', 'N/A')
+    msg = "Status {} <{}>, see {}".format(
+        cause.status,
+        ' '.join("{}={}".format(key, val) for key, val in sorted(iteritems(data))),
+        doc_url,
+    )
+    if prefix:
+        msg = "{}: {}".format(prefix, msg)
+    return msg
 
 
 class GitHubConfig(object):
@@ -67,7 +83,7 @@ class GitHubConfig(object):
     def _get_auth_from_netrc(self, hostname):
         """Try to find login auth in ``~/.netrc``."""
         hostauth = netrc(self.NETRC_FILE)
-        auth = (None,) * 3
+        auth = None
         if self.user:
             # Try to find specific `user@host` credentials
             auth = hostauth.hosts.get(self.user + '@' + hostname, None)
@@ -75,7 +91,7 @@ class GitHubConfig(object):
             auth = hostauth.hosts.get(hostname, None)
 
         if auth:
-            login, account, password = auth
+            login, account, password = auth  # pylint: disable=unpacking-non-sequence
             if login:
                 self.user = login
             if password == 'token':
@@ -92,7 +108,14 @@ def api(config=None):
     """
     cfg = GitHubConfig(config)
     assert cfg.auth_valid(), \
-        "Attempt to connect to GitHub API without sufficient credentials! Check your configuration."
-    apiobj = GitHub(cfg.login_or_token, cfg.password, cfg.base_url, timeout=cfg.timeout)
-    apiobj.gh_config = cfg
-    return apiobj
+        "Attempt to connect to GitHub API with insufficient credentials! Check your configuration."
+    key = '~'.join([cfg.login_or_token, cfg.password or '', cfg.base_url])
+    if key in api.conns:
+        return api.conns[key]
+    else:
+        apiobj = Github(cfg.login_or_token, cfg.password, cfg.base_url, timeout=cfg.timeout)
+        apiobj.gh_config = cfg
+        api.conns[key] = apiobj
+        return apiobj
+
+api.conns = {}
