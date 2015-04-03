@@ -61,6 +61,8 @@ most importantly credentials for API access. The recommended way for doing so is
  3. Call ``chmod 600 ~/.netrc`` to protect your sensitive data.
 
 This way, the sensitive authentication information is separate from the rest of the configuration.
+Use the ``gh help`` command to check whether your credentials actually work
+– if they do, your GitHub user information is displayed, otherwise you'll get an error indicator.
 
 
 ### Main Configuration File
@@ -96,6 +98,11 @@ in the hope that it's quite obvious what they do.
 ### Users
 
  * :heavy_check_mark: ``gh user show [‹username›…]``
+
+
+### Miscellaneous
+
+ * :heavy_check_mark: ``gh help`` – Show information about the installation & configuration, and how to get further help.
 
 
 ## Contributing
