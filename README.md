@@ -95,7 +95,7 @@ in the hope that it's quite obvious what they do.
 
 ### Users
 
- * ``gh user show [‹username›…]``
+ * :heavy_check_mark: ``gh user show [‹username›…]``
 
 
 ## Contributing
