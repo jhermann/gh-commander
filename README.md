@@ -125,7 +125,6 @@ To create a working directory for this project, call these commands:
 git clone "https://github.com/jhermann/gh-commander.git"
 cd "gh-commander"
 . .env --yes --develop
-# export TOXENV=py27,py33
 invoke ci
 ```
 
@@ -138,6 +137,9 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 
 **General**
 * [GitHub API v3](https://developer.github.com/v3/)
+
+**Similar Projects**
+* [sigmavirus24/github-cli](https://github.com/sigmavirus24/github-cli)
 
 **Tools**
 
@@ -152,7 +154,7 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 
 **Packages**
 
-* [PyGithub](https://github.com/PyGithub/PyGithub)
+* [github3.py](http://github3py.readthedocs.org/)
 * [Rituals](https://jhermann.github.io/rituals)
 * [Click](http://click.pocoo.org/)
 * [sh](http://amoffat.github.io/sh/)

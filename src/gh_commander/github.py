@@ -18,22 +18,18 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import errno
-from netrc import netrc
+from netrc import netrc, NetrcParseError
 
-from github import *  # pylint: disable=wildcard-import
+from github3 import *  # pylint: disable=wildcard-import
 
 from ._compat import iteritems, urlparse
 
 
 def pretty_cause(cause, prefix=None):
     """Format a GitHub exception nicely."""
-    data = cause.data.copy()
-    doc_url = data.pop('documentation_url', 'N/A')
-    msg = "Status {} <{}>, see {}".format(
-        cause.status,
-        ' '.join("{}={}".format(key, val) for key, val in sorted(iteritems(data))),
-        doc_url,
-    )
+    msg = 'Status {} "{}"'.format(cause.code, cause.msg)
+    if cause.errors:
+        msg += '\n    ' + '\n    '.join(cause.errors)
     if prefix:
         msg = "{}: {}".format(prefix, msg)
     return msg
@@ -45,17 +41,18 @@ class GitHubConfig(object):
         Regarding authentication, see https://developer.github.com/v3/#authentication
     """
 
+    DEFAULT_URL = 'https://api.github.com'
     NETRC_FILE = None  # use the default, unless changed for test purposes
 
 
     def __init__(self, config=None):
         """Load configuration, especially authetication."""
         # TODO: look into config for non-default values
-        self.base_url = 'https://api.github.com'
+        self.base_url = None
         self.user = None
         self.login_or_token = None
         self.password = None
-        self.timeout = 10
+        # self.timeout = 10
         # client_id – string
         # client_secret – string
 
@@ -69,7 +66,7 @@ class GitHubConfig(object):
 
     def _get_auth(self, config):
         """Try to get login auth from either base URL or netrc."""
-        auth_url = urlparse(self.base_url)
+        auth_url = urlparse(self.base_url or self.DEFAULT_URL)
         if auth_url.username:
             self.user = auth_url.username
         if auth_url.password:
@@ -88,6 +85,8 @@ class GitHubConfig(object):
             if cause.errno != errno.ENOENT:
                 raise
             return
+        except NetrcParseError as cause:
+            raise  # TODO: Make this log nicely, not produce a stack trace
 
         auth = None
         if self.user:
@@ -102,6 +101,7 @@ class GitHubConfig(object):
                 self.user = login
             if password == 'token':
                 self.login_or_token = account
+                self.password = password
             elif password:
                 self.login_or_token = self.user
                 self.password = password
@@ -115,11 +115,22 @@ def api(config=None):
     cfg = GitHubConfig(config)
     assert cfg.auth_valid(), \
         "Attempt to connect to GitHub API with insufficient credentials! Check your configuration."
-    key = '~'.join([cfg.login_or_token, cfg.password or '', cfg.base_url])
+    key = '~'.join([cfg.login_or_token, cfg.password or '', cfg.base_url or cfg.DEFAULT_URL])
     if key in api.conns:
         return api.conns[key]
     else:
-        apiobj = Github(cfg.login_or_token, cfg.password, cfg.base_url, timeout=cfg.timeout)
+        if cfg.password == 'token':
+            kwargs = dict(token=cfg.login_or_token)
+        else:
+            kwargs = dict(username=cfg.login_or_token, password=cfg.password)
+        if cfg.base_url:
+            auth_method = enterprise_login
+            kwargs['url'] = cfg.base_url
+        else:
+            auth_method = login
+
+        # print("AUTH", kwargs)
+        apiobj = auth_method(**kwargs)
         apiobj.gh_config = cfg
         api.conns[key] = apiobj
         return apiobj

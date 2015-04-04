@@ -42,8 +42,13 @@ class AttributeMapping(object):
 
 def dump_user(api, username):
     """Dump user information to console."""
-    gh_user = api.get_user(username)
-    userdict = AttributeMapping(gh_user)
+    gh_user = api.user(username)
+    userdict = gh_user.as_dict()
+    userdict.setdefault('total_private_repos', -1)
+    userdict.setdefault('private_gists', -1)
+    userdict.setdefault('disk_usage', -1)
+
+    # TODO: Use Jinja2
     click.echo("ACCOUNT     %(name)s [%(login)s / %(type)s #%(id)s]" % userdict)
     click.echo("SINCE/LAST  %(created_at)s / %(updated_at)s" % userdict)
     click.echo("URL         %(url)s" % userdict)
@@ -51,7 +56,7 @@ def dump_user(api, username):
         click.echo("EMAIL       %(email)s" % userdict)
     if gh_user.location:
         click.echo("LOCATION    %(location)s" % userdict)
-    click.echo("REPOS/GISTS %(public_repos)s ☑ ⎇  / %(private_repos)s ☒ ⎇  "
+    click.echo("REPOS/GISTS %(public_repos)s ☑ ⎇  / %(total_private_repos)s ☒ ⎇  "
                "/ %(public_gists)s ☑ ✍ / %(private_gists)s ☒ ✍" % userdict)
     click.echo("STATS       ⇦ ⋮ %(followers)s / ⇨ ⋮ %(following)s / %(disk_usage)s ◔" % userdict)
 
@@ -86,7 +91,7 @@ def help_command(ctx):
     else:
         try:
             dump_user(api, api.gh_config.user)
-        except github.BadCredentialsException as cause:
+        except github.GitHubError as cause:
             click.secho(github.pretty_cause(cause, "API"), fg='white', bg='red', bold=True)
 
     banner('More Help')
