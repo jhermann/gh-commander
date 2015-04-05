@@ -31,15 +31,6 @@ def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~'
     return path
 
 
-class AttributeMapping(object):
-    """Access attributes of an object via the mapping protocol."""
-    def __init__(self, obj):
-        self._obj = obj
-
-    def __getitem__(self, key, default=None):
-        return getattr(self._obj, key, default)
-
-
 def dump_user(api, username):
     """Dump user information to console."""
     gh_user = api.user(username)
