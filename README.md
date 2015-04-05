@@ -67,8 +67,7 @@ most importantly credentials for API access. The recommended way for doing so is
 
         machine api.github.com
             user «your GitHub username»
-            password token
-            account «your personal access token»
+            password «your personal access token»
 
  3. Call ``chmod 600 ~/.netrc`` to protect your sensitive data.
 
