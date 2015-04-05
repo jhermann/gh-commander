@@ -26,7 +26,7 @@ It allows to access the
 from a shell prompt for things usually done in the browser,
 and also automates tasks that otherwise are tedious at best,
 when done by clicking around on a web page.
-GitHub Commander is powered by [PyGithub](https://github.com/PyGithub/PyGithub).
+*GitHub Commander* is powered by [github3.py](https://github.com/sigmavirus24/github3.py).
 
 :information_source: | Initially, the focus of the project will be to provide task automation, not completeness of covering every API aspect!
 ---- | :----
