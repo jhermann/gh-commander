@@ -28,6 +28,7 @@ import qstatpretty.ttyutil.shrink as ttyshrink
 import qstatpretty.ttyutil.size as ttysize
 
 from .. import config, github
+from ..util import dclick
 
 
 DEFAULT_TABLE_FORMAT = [
@@ -72,7 +73,14 @@ def dump_labels(api, repo):
     click.echo(ttytable.pretty_table(table, table_format, delimiters=delimiters))
 
 
-@config.cli.group()
+class LabelAliases(dclick.AliasedGroup):
+    """Alias mapping for 'label' commands."""
+    MAP = dict(
+        ls='list',
+    )
+
+
+@config.cli.group(cls=LabelAliases)
 def label():
     """Managing issue labels."""
 
