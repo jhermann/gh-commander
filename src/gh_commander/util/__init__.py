@@ -20,8 +20,11 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 import re
 
+import click
+
 
 def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
-    """Prettify path for humans."""
+    """Prettify path for humans, and make it Unicode."""
+    path = click.format_filename(path)
     path = _home_re.sub('~' + os.sep, path)
     return path
