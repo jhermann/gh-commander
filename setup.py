@@ -118,7 +118,8 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
                     line = line.strip()
                     if line and not line.startswith('#'):
                         if line.startswith('-e'):
-                            line = line.split()[1].split('#egg=')[1]
+                            #line = line.split()[1].split('#egg=')[1]
+                            continue
                         requires[key].append(line)
     if not any('pytest' == re.split('[\t ,<=>]', i.lower())[0] for i in requires['test']):
         requires['test'].append('pytest') # add missing requirement
