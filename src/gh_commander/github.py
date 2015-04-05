@@ -22,7 +22,7 @@ from netrc import netrc, NetrcParseError
 
 from github3 import *  # pylint: disable=wildcard-import
 
-from ._compat import iteritems, urlparse
+from ._compat import urlparse
 
 
 def pretty_cause(cause, prefix=None):
@@ -96,9 +96,9 @@ class GitHubConfig(object):
             auth = hostauth.hosts.get(hostname, None)
 
         if auth:
-            login, account, password = auth  # pylint: disable=unpacking-non-sequence
-            if login:
-                self.user = login
+            username, account, password = auth  # pylint: disable=unpacking-non-sequence
+            if username:
+                self.user = username
             if password == 'token':
                 self.login_or_token = account
                 self.password = password
