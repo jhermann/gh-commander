@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=bad-continuation, unused-import
-""" CLI commands.
+# pylint: disable=bad-continuation
+""" Helpers.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
 #
@@ -17,7 +17,11 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-# Load the command modules for registration
-from . import help  # pylint: disable=redefined-builtin
-from . import user
-from . import label
+import os
+import re
+
+
+def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
+    """Prettify path for humans."""
+    path = _home_re.sub('~' + os.sep, path)
+    return path

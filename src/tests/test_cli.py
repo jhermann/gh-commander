@@ -89,7 +89,7 @@ def test_cmd_missing():
 @cli
 def test_cmd_help():
     runner = CliRunner()
-    result = runner.invoke(commands.help_command)
+    result = runner.invoke(commands.help.help_command)
     if result.exit_code:
         print(vars(result))
         print('~' * 78)

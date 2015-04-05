@@ -102,9 +102,9 @@ in the hope that it's quite obvious what they do.
 
 ### Labels
 
- * :soon: ``gh labels list ‹repo›…``
- * :soon: ``gh labels export ‹repo› [to] ‹filename›``
- * :soon: ``gh labels import ‹repo› [from] ‹filename›``
+ * :heavy_check_mark: ``gh label list ‹repo›…``
+ * :soon: ``gh label export ‹repo› [to] ‹filename›``
+ * :soon: ``gh label import ‹repo› [from] ‹filename›``
 
 
 ### Users
