@@ -22,7 +22,7 @@ import re
 
 import click
 
-from . import config, github
+from .. import config, github
 
 
 def pretty_path(path, _home_re=re.compile('^' + re.escape(os.path.expanduser('~') + os.sep))):
