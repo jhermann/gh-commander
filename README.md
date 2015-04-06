@@ -77,8 +77,9 @@ see [releases](https://github.com/jhermann/gh-commander/releases) for an overvie
 To get a bleeding-edge version from source, use these commands:
 
 ```sh
-pip install -r <(curl -skS "https://raw.githubusercontent.com/jhermann/gh-commander/master/requirements.txt")
-pip install -UI -e git+https://github.com/jhermann/gh-commander.git#egg=gh-commander
+repo="jhermann/gh-commander"
+pip install -r <(curl -skS "https://raw.githubusercontent.com/$repo/master/requirements.txt")
+pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
 ```
 
 See [Contributing](#contributing) on how to create a full development environment.
