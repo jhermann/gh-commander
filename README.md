@@ -32,6 +32,44 @@ when done by clicking around on a web page.
 ---- | :----
 
 
+## Examples
+
+To give you a quick impression of what this tool can do for you, here are some example calls:
+
+```sh
+$ gh user show foo
+ACCOUNT     Maciek Pacut [foo / User #33384]
+SINCE/LAST  2008-11-08T18:01:02Z / 2015-03-30T21:35:31Z
+URL         https://api.github.com/users/foo
+EMAIL       maciek.pacut@gmail.com
+REPOS/GISTS 14 ☑ ⎇  / -1 ☒ ⎇  / 0 ☑ ✍ / -1 ☒ ✍
+STATS       ⇦ ⋮ 1 / ⇨ ⋮ 0 / -1 ◔
+
+$ gh label ls foo/ii
+⎇   foo/ii
+┌─────────────┬─────────┐
+│ Name        │ Color   │
+├─────────────┼─────────┤
+│ maciekpacut │ #000000 │
+└─────────────┴─────────┘
+
+$ gh label export --format yaml jhermann/gh-commander to -
+- {Color: '#fc2929', Name: bug}
+- {Color: '#cccccc', Name: duplicate}
+- {Color: '#84b6eb', Name: enhancement}
+- {Color: '#159818', Name: help wanted}
+- {Color: '#ededed', Name: in progress}
+- {Color: '#e6e6e6', Name: invalid}
+- {Color: '#cc317c', Name: question}
+- {Color: '#ededed', Name: ready}
+- {Color: '#ffffff', Name: wontfix}
+
+$ gh label export waif rituals to labels.xls
+```
+
+![labels.xls](https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/label_export_excel.png)
+
+
 ## Installation
 
 See [Contributing](#contributing) for now.
@@ -135,9 +173,11 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 ## References
 
 **General**
+
 * [GitHub API v3](https://developer.github.com/v3/)
 
 **Similar Projects**
+
 * [sigmavirus24/github-cli](https://github.com/sigmavirus24/github-cli)
 
 **Tools**
@@ -157,6 +197,7 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 * [Rituals](https://jhermann.github.io/rituals)
 * [Click](http://click.pocoo.org/)
 * [sh](http://amoffat.github.io/sh/)
+* [tablib](http://docs.python-tablib.org/en/latest/)
 
 
 ## Acknowledgements
