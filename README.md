@@ -72,7 +72,16 @@ $ gh label export waif rituals to labels.xls
 
 ## Installation
 
-See [Contributing](#contributing) for now.
+*GitHub Commander* can be installed via ``pip install gh-commander`` as usual,
+see [releases](https://github.com/jhermann/gh-commander/releases) for an overview of available versions.
+To get a bleeding-edge version from source, use these commands:
+
+```sh
+pip install -r <(curl -skS "https://raw.githubusercontent.com/jhermann/gh-commander/master/requirements.txt")
+pip install -UI -e git+https://github.com/jhermann/gh-commander.git#egg=gh-commander
+```
+
+See [Contributing](#contributing) on how to create a full development environment.
 
 To add bash completion, read the [Click docs](http://click.pocoo.org/4/bashcomplete/#activation) about it,
 or just follow these instructions:
