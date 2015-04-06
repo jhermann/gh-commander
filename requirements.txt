@@ -9,5 +9,6 @@ configobj==5.0.6
 #github3.py>=1.0
 -e git+https://github.com/jhermann/github3.py.git@login-with-personal-token#egg=github3.py
 
+tablib==0.10.0
 # TODO: clear up license situation before a final release, or switch to something else
 -e git+https://github.com/sseemayer/qstat-pretty.git#egg=qstatpretty

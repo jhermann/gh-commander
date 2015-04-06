@@ -102,8 +102,8 @@ in the hope that it's quite obvious what they do.
 ### Labels
 
  * :heavy_check_mark: ``gh label list ‹repo›…``
- * :soon: ``gh label export ‹repo› [to] ‹filename›``
- * :soon: ``gh label import ‹repo› [from] ‹filename›``
+ * :heavy_check_mark: ``gh label export [--format=…] ‹repo› [to] ‹filename.ext›``
+ * :soon: ``gh label import ‹repo› [from] ‹filename.ext›``
 
 
 ### Users

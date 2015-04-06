@@ -19,7 +19,11 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
+
 import click
+from click.exceptions import UsageError
+import tablib
 
 # TODO: clear up license situation before a final release, or switch to something else
 import qstatpretty.ttyutil.color as ttycolor
@@ -30,6 +34,8 @@ import qstatpretty.ttyutil.size as ttysize
 from .. import config, github
 from ..util import dclick
 
+
+SERIALIZERS = ('json', 'yaml', 'csv', 'xls', 'dbf')  # TODO: export to 'html', 'tty'
 
 DEFAULT_TABLE_FORMAT = [
     {
@@ -49,25 +55,33 @@ DEFAULT_TABLE_FORMAT = [
 ]
 
 
-def dump_labels(api, repo):
-    """Dump labels of a repo."""
-    def pad(cell):
-        "Helper"
-        return ' {} '.format(cell)
-
+def get_labels(api, repo):
+    """Get label dataset for a repo."""
     if '/' in repo:
         user, repo = repo.split('/', 1)
     else:
         user = api.gh_config.user
     gh_repo = api.repository(user, repo)
-    data = sorted((pad(label.name), pad('#' + label.color)) for label in gh_repo.labels())
-    data = [(pad('Name'), pad('Color'))] + list(data)
+    data = sorted((label.name, '#' + label.color) for label in gh_repo.labels())
+    headers = ('Name', 'Color')
+    return user, repo, headers, data
 
-    terminal_width = ttysize.terminal_size()[0]
+
+def dump_labels(api, repo):
+    """Dump labels of a repo."""
+    def padded(rows):
+        "Helper"
+        for row in rows:
+            yield tuple(' {} '.format(cell) for cell in row)
+
+    user, repo, headers, data = get_labels(api, repo)
+    data = padded([headers] + list(data))
+
+    #terminal_width = ttysize.terminal_size()[0]
     table_format = DEFAULT_TABLE_FORMAT
     delimiters = ttytable.DELIMITERS_DEFAULT
 
-    table = data
+    table = list(data)
     #table = ttyshrink.grow_table(data, terminal_width, table_format, delimiters)
     click.secho('⎇   {}/{}'.format(user, repo), fg='white', bg='blue', bold=True)
     click.echo(ttytable.pretty_table(table, table_format, delimiters=delimiters))
@@ -91,7 +105,43 @@ def label_list(repo=None):
     """Dump labels within the given repo(s)."""
     api = github.api(config=None)  # TODO: config object
 
-    for idx, repo in enumerate(repo or []):
+    for idx, reponame in enumerate(repo or []):
         if idx:
             click.echo('')
-        dump_labels(api, repo)
+        dump_labels(api, reponame)
+
+
+@label.command()
+@click.option('--format', 'serializer', default=None, type=click.Choice(SERIALIZERS),
+    help="Output format (defaults to extension of `outfile`).",
+)
+@click.argument('repo', nargs=-1)
+@click.argument('outfile', type=click.File('wb'))
+@click.pass_context
+def export(ctx, repo, outfile, serializer):
+    """Export labels of the given repo(s) to a file."""
+    api = github.api(config=None)  # TODO: config object
+    tabdata = tablib.Dataset()
+    if repo and repo[-1].lower() == 'to':
+        repo = repo[:-1]
+    if not repo:
+        raise UsageError("You provided no repository names!", ctx=ctx)
+    if serializer is None:
+        outname = getattr(outfile, 'name', None)
+        _, ext = os.path.splitext(outname or '<stream>')
+        ext = ext.lstrip('.')
+        if ext in SERIALIZERS:
+            serializer = ext
+        else:
+            raise UsageError('No --format given, and extension of "{}" is not one of {}.'
+                             .format(outname, ', '.join(SERIALIZERS)), ctx=ctx)
+
+    for idx, reponame in enumerate(repo):
+        user, repo, headers, data = get_labels(api, reponame)
+        if not idx:
+            tabdata.headers = headers
+        tabdata.append_separator('⎇   {}/{}'.format(user, repo))
+        for row in data:
+            tabdata.append(row)
+
+    outfile.write(getattr(tabdata, serializer))
