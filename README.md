@@ -78,7 +78,7 @@ To get a bleeding-edge version from source, use these commands:
 
 ```sh
 repo="jhermann/gh-commander"
-pip install -r <(curl -skS "https://raw.githubusercontent.com/$repo/master/requirements.txt")
+pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
 pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
 ```
 
