@@ -138,13 +138,29 @@ in the hope that it's quite obvious what they do.
 
 ### General Options
 
+These options must appear before any sub-command, directly after ``gh``.
+
  * ``--user ‹account name›`` – Override account name from config.
  * ``--token ‹API token›`` – Override API token from config.
  * ``--site ‹base URL›`` – Override site URL for on-premise installations of GitHub.
 
+
+### Common Options
+
+Many of the commands do similar things, like exporting data.
+That fact is reflected in some shared options that always behave the same.
+See the ``--help`` message of every command for details and specific options.
+
+ * ``--format ‹choice›`` – Specifies the output format to use, but is only
+   needed in absence of a filename with a clear extension. The choices are
+   ``json``, ``yaml``, ``csv``, ``xls``, and ``dbf``.
+
+
 ### Common Arguments
 
- * ``‹repo›`` – A repository name, either fully qualified in the form ``‹account›/‹repo›``, or else a plain repository name assumed to be owned by the current user.
+ * ``‹repo›`` – A repository name, either fully qualified in the form
+   ``‹account›/‹repo›``, or else a plain repository name assumed to be
+   owned by the current user.
 
 
 ### Labels
