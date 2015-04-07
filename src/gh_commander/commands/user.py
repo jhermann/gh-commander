@@ -33,7 +33,7 @@ def dump_user(api, username):
     # TODO: Use Jinja2
     click.echo("ACCOUNT     %(name)s [%(login)s / %(type)s #%(id)s]" % userdict)
     click.echo("SINCE/LAST  %(created_at)s / %(updated_at)s" % userdict)
-    click.echo("URL         %(url)s" % userdict)
+    click.echo("URL         %(html_url)s" % userdict)
     if gh_user.email:
         click.echo("EMAIL       %(email)s" % userdict)
     if gh_user.location:
