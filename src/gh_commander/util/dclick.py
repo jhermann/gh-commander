@@ -20,6 +20,14 @@ from __future__ import absolute_import, unicode_literals, print_function
 import click
 
 
+class LoggedFailure(click.UsageError):
+    """Report a failure condition to the user."""
+
+    def __init__(self, message):
+        message = click.style(message, fg='white', bg='red', bold=True)
+        click.UsageError.__init__(self, message)
+
+
 class AliasedGroup(click.Group):
     """ A command group with alias names.
 
