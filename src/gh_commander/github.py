@@ -23,6 +23,7 @@ from netrc import netrc, NetrcParseError
 from github3 import *  # pylint: disable=wildcard-import
 
 from ._compat import urlparse
+from .util import dclick
 
 
 def pretty_cause(cause, prefix=None):
@@ -113,8 +114,9 @@ def api(config=None):
         See http://jacquev6.net/PyGithub/v1/github.html for more details.
     """
     cfg = GitHubConfig(config)
-    assert cfg.auth_valid(), \
-        "Attempt to connect to GitHub API with insufficient credentials! Check your configuration."
+    if not cfg.auth_valid():
+        raise dclick.LoggedFailure("Attempt to connect to GitHub API"
+                                   " with insufficient credentials! Check your configuration.")
     key = '~'.join([cfg.login_or_token, cfg.password or '', cfg.base_url or cfg.DEFAULT_URL])
     if key in api.conns:
         return api.conns[key]
