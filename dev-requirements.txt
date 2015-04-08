@@ -9,7 +9,7 @@ invoke==0.10.1
 bpython==0.14.1
 yolk3k==0.8.6
 #pythonpy==0.4.0
--e git+https://github.com/jhermann/pythonpy.git@patch-1#egg=pythonpy
+-e git+https://github.com/jhermann/pythonpy.git@fix-setup-for-py3#egg=pythonpy
 
 pylint==1.4.3
 tox==1.9.2
