@@ -144,9 +144,9 @@ def export(ctx, repo, outfile, serializer):
         user, repo, headers, data = get_labels(api, reponame)
         if not idx:
             tabdata.headers = headers
-        tabdata.append_separator('⎇   {}/{}'.format(user, repo).encode('utf-8'))
+        tabdata.append_separator('⎇   {}/{}'.format(user, repo))
         for row in data:
-            tabdata.append(tuple(i.encode('utf-8') for i in row))
+            tabdata.append(row)
 
     text = getattr(tabdata, serializer)
     if not isinstance(text, string_types):
