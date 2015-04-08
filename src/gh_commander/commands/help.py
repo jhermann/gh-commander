@@ -57,6 +57,9 @@ def help_command(ctx):
     else:
         try:
             dump_user(api, api.gh_config.user)
+            limit = api.ratelimit_remaining
+            fgcol = 'yellow' if limit >= 100 else 'cyan'
+            click.secho('\n{} calls/h remaining.'.format(limit), fg=fgcol, bg='black', bold=True)
         except ConnectionError as cause:
             dclick.serror("HTTP: {}", cause)
         except github.GitHubError as cause:
