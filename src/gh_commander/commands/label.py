@@ -36,8 +36,8 @@ from .._compat import string_types
 from ..util import dclick
 
 
-SERIALIZERS_1LINE = ('dict', 'json', 'html')
-SERIALIZERS_TEXT  = SERIALIZERS_1LINE + ('yaml', 'csv', 'tsv')
+SERIALIZERS_NEED_NL = ('dict', 'json', 'html')
+SERIALIZERS_TEXT  = SERIALIZERS_NEED_NL + ('yaml', 'csv', 'tsv')
 SERIALIZERS_BINARY = ('ods', 'xls', 'xlsx')
 SERIALIZERS = SERIALIZERS_TEXT + SERIALIZERS_BINARY  # TODO: export to 'tty'
 
@@ -151,6 +151,6 @@ def export(ctx, repo, outfile, serializer):
     text = getattr(tabdata, serializer)
     if not isinstance(text, string_types):
         text = repr(text)
-    if serializer in SERIALIZERS_1LINE:
+    if serializer in SERIALIZERS_NEED_NL:
         text += '\n'
     outfile.write(text)
