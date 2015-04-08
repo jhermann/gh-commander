@@ -116,7 +116,7 @@ def label_list(repo=None):
 
 
 @label.command()
-@click.option('--format', 'serializer', default=None, type=click.Choice(SERIALIZERS),
+@click.option('-f', '--format', 'serializer', default=None, type=click.Choice(SERIALIZERS),
     help="Output format (defaults to extension of `outfile`).",
 )
 @click.argument('repo', nargs=-1)
