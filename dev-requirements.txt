@@ -6,10 +6,11 @@ invoke==0.10.1
 #rituals==0.3.0
 -e git+https://github.com/jhermann/rituals.git#egg=rituals
 
-pylint==1.4.3
 bpython==0.14.1
+pythonpy==0.4.0
 yolk3k==0.8.6
 
+pylint==1.4.3
 tox==1.9.2
 twine==1.5.0
 
