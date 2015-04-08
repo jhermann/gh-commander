@@ -1,6 +1,7 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, unused-wildcard-import, missing-docstring
 # pylint: disable=redefined-outer-name, no-self-use, bad-continuation
+# pylint: disable=unused-argument, bad-whitespace, invalid-name
 """ Test 'label' sub-commands.
 
     See http://click.pocoo.org/3/testing/
@@ -19,9 +20,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
-
-import os
-import sys
 
 import pytest
 from bunch import Bunch
@@ -70,7 +68,8 @@ def test_command_label_export_takes_all_explicit_formats_correctly(tmpdir, apimo
     for serializer in label.SERIALIZERS:
         testfile = tmpdir.join("explicit-{}.dat".format(serializer))
         assert str(testfile).endswith('.dat')
-        not testfile.exists() or testfile.remove()
+        if testfile.exists():
+            testfile.remove()
         result = runner.invoke(label.export, ('--format', serializer, "jhermann/waif", "to", str(testfile)))
         # print(serializer, result); print(vars(result))
 
@@ -91,7 +90,8 @@ def test_command_label_export_detects_yaml_extension(tmpdir, apimock):
     runner = CliRunner()
     testfile = tmpdir.join("implicit.yaml")
     assert str(testfile).endswith('.yaml')
-    not testfile.exists() or testfile.remove()
+    if testfile.exists():
+        testfile.remove()
     result = runner.invoke(label.export, ("waif", str(testfile)))
 
     assert result.exit_code == 0, "Exit code OK for implicit YAML"

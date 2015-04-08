@@ -29,7 +29,7 @@ import tablib
 import qstatpretty.ttyutil.color as ttycolor
 import qstatpretty.ttyutil.table as ttytable
 import qstatpretty.ttyutil.shrink as ttyshrink
-import qstatpretty.ttyutil.size as ttysize
+#import qstatpretty.ttyutil.size as ttysize
 
 from .. import config, github
 from .._compat import text_type, string_types
@@ -37,7 +37,7 @@ from ..util import dclick
 
 
 SERIALIZERS_NEED_NL = ('dict', 'json', 'html')
-SERIALIZERS_TEXT  = SERIALIZERS_NEED_NL + ('yaml', 'csv', 'tsv')
+SERIALIZERS_TEXT = SERIALIZERS_NEED_NL + ('yaml', 'csv', 'tsv')
 SERIALIZERS_BINARY = ('ods', 'xls')  # this just doesn't work right (Unicode issues): , 'xlsx')
 SERIALIZERS = SERIALIZERS_TEXT + SERIALIZERS_BINARY  # TODO: export to 'tty'
 
