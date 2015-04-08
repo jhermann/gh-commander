@@ -7,8 +7,9 @@ invoke==0.10.1
 -e git+https://github.com/jhermann/rituals.git#egg=rituals
 
 bpython==0.14.1
-pythonpy==0.4.0
 yolk3k==0.8.6
+#pythonpy==0.4.0
+-e git+https://github.com/jhermann/pythonpy.git@patch-1#egg=pythonpy
 
 pylint==1.4.3
 tox==1.9.2
