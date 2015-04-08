@@ -18,6 +18,7 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import errno
+import threading
 from netrc import netrc, NetrcParseError
 
 from github3 import *  # pylint: disable=wildcard-import
@@ -117,10 +118,16 @@ def api(config=None):
     if not cfg.auth_valid():
         raise dclick.LoggedFailure("Attempt to connect to GitHub API"
                                    " with insufficient credentials! Check your configuration.")
-    key = '~'.join([cfg.login_or_token, cfg.password or '', cfg.base_url or cfg.DEFAULT_URL])
-    if key in api.conns:
-        return api.conns[key]
+
+    api.memo.__dict__.setdefault('conns', {})
+    if None in api.memo.conns:  # Running unit test?
+        key = None
     else:
+        key = '~'.join([cfg.login_or_token, cfg.password or '', cfg.base_url or cfg.DEFAULT_URL])
+
+    try:
+        apiobj = api.memo.conns[key]
+    except KeyError:
         if cfg.password == 'token':
             kwargs = dict(token=cfg.login_or_token)
         else:
@@ -134,7 +141,8 @@ def api(config=None):
         # print("AUTH", kwargs)
         apiobj = auth_method(**kwargs)
         apiobj.gh_config = cfg
-        api.conns[key] = apiobj
-        return apiobj
+        api.memo.conns[key] = apiobj
 
-api.conns = {}
+    return apiobj
+
+api.memo = threading.local()
