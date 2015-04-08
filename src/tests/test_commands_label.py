@@ -53,7 +53,7 @@ def apimock():
 
 
 @cli
-def test_command_label_list_has_mocked_data(tmpdir, apimock):
+def test_command_label_list_uses_the_mocked_data(tmpdir, apimock):
     runner = CliRunner()
     result = runner.invoke(label.label_list, ("jhermann/waif",))
     linecount = len(result.output.splitlines())
@@ -65,7 +65,7 @@ def test_command_label_list_has_mocked_data(tmpdir, apimock):
 
 
 @cli
-def test_command_label_export_takes_all_explicit_formats(tmpdir, apimock):
+def test_command_label_export_takes_all_explicit_formats_correctly(tmpdir, apimock):
     runner = CliRunner()
     for serializer in label.SERIALIZERS:
         testfile = tmpdir.join("explicit-{}.dat".format(serializer))
@@ -84,8 +84,23 @@ def test_command_label_export_takes_all_explicit_formats(tmpdir, apimock):
             if serializer in label.SERIALIZERS_NEED_NL:
                 assert content.splitlines()[-1] != '', "Last line is not empty for " + serializer
 
+
 @cli
-def test_command_label_export_dash_writes_to_stdout(apimock):
+def test_command_label_export_detects_yaml_extension(tmpdir, apimock):
+    # testing only one format as a representative here
+    runner = CliRunner()
+    testfile = tmpdir.join("implicit.yaml")
+    assert str(testfile).endswith('.yaml')
+    not testfile.exists() or testfile.remove()
+    result = runner.invoke(label.export, ("waif", str(testfile)))
+
+    assert result.exit_code == 0, "Exit code OK for implicit YAML"
+    content = testfile.read_text('utf-8')
+    assert content.startswith('- {'), "Output file is YAML"
+
+
+@cli
+def test_command_label_export_to_dash_writes_to_stdout(apimock):
     runner = CliRunner()
     result = runner.invoke(label.export, ('--format', 'yaml', "waif", '-'))
     linecount = len(result.output.splitlines())
@@ -93,3 +108,11 @@ def test_command_label_export_dash_writes_to_stdout(apimock):
     assert result.exit_code == 0, "Exit code OK for YAML to stdout"
     assert linecount == len(MOCK_DATA), "Number of dumped lines OK for YAML to stdout"
     assert result.output.startswith('- {'), "stdout is YAML"
+
+
+@cli
+def test_command_label_export_to_dash_without_format_fails(apimock):
+    runner = CliRunner()
+    result = runner.invoke(label.export, ("waif", '-'))
+
+    assert result.exit_code > 0, "Exit code indicates error for unknown format with stdout"
