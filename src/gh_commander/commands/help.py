@@ -20,9 +20,10 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 
 import click
+from requests.exceptions import ConnectionError
 
 from .. import config, github
-from ..util import pretty_path
+from ..util import pretty_path, dclick
 from .user import dump_user
 
 
@@ -52,12 +53,14 @@ def help_command(ctx):
     try:
         api = github.api(config=None)  # TODO: config object
     except AssertionError as cause:
-        click.secho("AUTH: {}".format(cause), fg='white', bg='red', bold=True)
+        dclick.serror("AUTH: {}", cause)
     else:
         try:
             dump_user(api, api.gh_config.user)
+        except ConnectionError as cause:
+            dclick.serror("HTTP: {}", cause)
         except github.GitHubError as cause:
-            click.secho(github.pretty_cause(cause, "API"), fg='white', bg='red', bold=True)
+            dclick.serror(github.pretty_cause(cause, "API"))
 
     banner('More Help')
     click.echo("Call '{} --help' to get a list of available commands & options.".format(app_name))
