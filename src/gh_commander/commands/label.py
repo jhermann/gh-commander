@@ -32,10 +32,14 @@ import qstatpretty.ttyutil.shrink as ttyshrink
 import qstatpretty.ttyutil.size as ttysize
 
 from .. import config, github
+from .._compat import string_types
 from ..util import dclick
 
 
-SERIALIZERS = ('json', 'yaml', 'csv', 'xls', 'dbf')  # TODO: export to 'html', 'tty'
+SERIALIZERS_1LINE = ('dict', 'json', 'html')
+SERIALIZERS_TEXT  = SERIALIZERS_1LINE + ('yaml', 'csv', 'tsv')
+SERIALIZERS_BINARY = ('ods', 'xls', 'xlsx')
+SERIALIZERS = SERIALIZERS_TEXT + SERIALIZERS_BINARY  # TODO: export to 'tty'
 
 DEFAULT_TABLE_FORMAT = [
     {
@@ -140,8 +144,13 @@ def export(ctx, repo, outfile, serializer):
         user, repo, headers, data = get_labels(api, reponame)
         if not idx:
             tabdata.headers = headers
-        tabdata.append_separator('⎇   {}/{}'.format(user, repo))
+        tabdata.append_separator('⎇   {}/{}'.format(user, repo).encode('utf-8'))
         for row in data:
-            tabdata.append(row)
+            tabdata.append(tuple(i.encode('utf-8') for i in row))
 
-    outfile.write(getattr(tabdata, serializer))
+    text = getattr(tabdata, serializer)
+    if not isinstance(text, string_types):
+        text = repr(text)
+    if serializer in SERIALIZERS_1LINE:
+        text += '\n'
+    outfile.write(text)
