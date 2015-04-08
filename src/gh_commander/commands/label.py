@@ -32,13 +32,13 @@ import qstatpretty.ttyutil.shrink as ttyshrink
 import qstatpretty.ttyutil.size as ttysize
 
 from .. import config, github
-from .._compat import string_types
+from .._compat import text_type, string_types
 from ..util import dclick
 
 
 SERIALIZERS_NEED_NL = ('dict', 'json', 'html')
 SERIALIZERS_TEXT  = SERIALIZERS_NEED_NL + ('yaml', 'csv', 'tsv')
-SERIALIZERS_BINARY = ('ods', 'xls', 'xlsx')
+SERIALIZERS_BINARY = ('ods', 'xls')  # this just doesn't work right (Unicode issues): , 'xlsx')
 SERIALIZERS = SERIALIZERS_TEXT + SERIALIZERS_BINARY  # TODO: export to 'tty'
 
 DEFAULT_TABLE_FORMAT = [
@@ -153,4 +153,6 @@ def export(ctx, repo, outfile, serializer):
         text = repr(text)
     if serializer in SERIALIZERS_NEED_NL:
         text += '\n'
+    if isinstance(text, text_type):
+        text = text.encode('utf-8')
     outfile.write(text)
