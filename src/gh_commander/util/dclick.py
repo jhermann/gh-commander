@@ -20,6 +20,13 @@ from __future__ import absolute_import, unicode_literals, print_function
 import click
 
 
+def serror(message, *args, **kwargs):
+    """Print a styled error message."""
+    if args or kwargs:
+        message = message.format(*args, **kwargs)
+    return click.secho(message, fg='white', bg='red', bold=True)
+
+
 class LoggedFailure(click.UsageError):
     """Report a failure condition to the user."""
 
