@@ -34,6 +34,7 @@ CONTEXT_SETTINGS = dict(
     auto_envvar_prefix=__app_name__.upper().replace('-', '_'),
 )
 
+
 # `--license` option decorator
 def license_option(*param_decls, **attrs):
     """``--license`` option that prints license information and then exits."""

@@ -71,5 +71,5 @@ def help_command(ctx):
     click.echo("Call '{} --version' to get the above version information separately.".format(app_name))
     click.echo("Call '{} --license' to get licensing informatioon.".format(app_name))
 
-    #click.echo('\ncontext = {}'.format(repr(vars(ctx))))
-    #click.echo('\nparent = {}'.format(repr(vars(ctx.parent))))
+    # click.echo('\ncontext = {}'.format(repr(vars(ctx))))
+    # click.echo('\nparent = {}'.format(repr(vars(ctx.parent))))

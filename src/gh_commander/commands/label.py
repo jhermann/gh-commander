@@ -29,7 +29,7 @@ import tablib
 import qstatpretty.ttyutil.color as ttycolor
 import qstatpretty.ttyutil.table as ttytable
 import qstatpretty.ttyutil.shrink as ttyshrink
-#import qstatpretty.ttyutil.size as ttysize
+# import qstatpretty.ttyutil.size as ttysize
 
 from .. import config, github
 from .._compat import text_type, string_types
@@ -81,12 +81,12 @@ def dump_labels(api, repo):
     user, repo, headers, data = get_labels(api, repo)
     data = padded([headers] + list(data))
 
-    #terminal_width = ttysize.terminal_size()[0]
+    # terminal_width = ttysize.terminal_size()[0]
     table_format = DEFAULT_TABLE_FORMAT
     delimiters = ttytable.DELIMITERS_DEFAULT
 
     table = list(data)
-    #table = ttyshrink.grow_table(data, terminal_width, table_format, delimiters)
+    # table = ttyshrink.grow_table(data, terminal_width, table_format, delimiters)
     click.secho('⎇   {}/{}'.format(user, repo), fg='white', bg='blue', bold=True)
     click.echo(ttytable.pretty_table(table, table_format, delimiters=delimiters))
 
