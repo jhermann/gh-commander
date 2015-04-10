@@ -1,0 +1,19 @@
+- {Color: '#00bb00', Name: '#1'}
+- {Color: '#119966', Name: '#2'}
+- {Color: '#775511', Name: '#3'}
+- {Color: '#fc2929', Name: bug}
+- {Color: '#eb6420', Name: defect}
+- {Color: '#666666', Name: docs}
+- {Color: '#cceeee', Name: duplicate}
+- {Color: '#44ee44', Name: easy}
+- {Color: '#3399ee', Name: enhancement}
+- {Color: '#2266cc', Name: evaluation}
+- {Color: '#159818', Name: help wanted}
+- {Color: '#eedd00', Name: idea}
+- {Color: '#ccffcc', Name: in progress}
+- {Color: '#eecc99', Name: invalid}
+- {Color: '#bb33cc', Name: question}
+- {Color: '#cceecc', Name: ready}
+- {Color: '#006b75', Name: refactoring}
+- {Color: '#996611', Name: task}
+- {Color: '#f099aa', Name: wontfix}
