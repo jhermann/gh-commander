@@ -167,7 +167,7 @@ See the ``--help`` message of every command for details and specific options.
 
  * :heavy_check_mark: ``gh label list ‹repo›…``
  * :heavy_check_mark: ``gh label export [--format=…] ‹repo›… [to] ‹filename.ext›``
- * :soon: ``gh label import ‹repo› [from] ‹filename.ext›``
+ * :heavy_check_mark: ``gh label import ‹repo› [from] ‹filename.ext›``
 
 
 ### Users
