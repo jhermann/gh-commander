@@ -194,13 +194,13 @@ def label_import(ctx, repo, infile, serializer):
     try:
         data = infile.read()
     except EnvironmentError as cause:
-        raise dclick.LoggedFailure('Error while reading "{}" ({})'.format(outname, cause))
+        raise dclick.LoggedFailure('Error while reading "{}" ({})'.format(inname, cause))
 
     # Read label data, and make it unique
     setattr(tabdata, serializer, data)
     import_labels = {}
-    for label in tabdata.dict:
-        name, color = label[HEADERS[0]], label[HEADERS[1]].lstrip('#').lower()
+    for import_label in tabdata.dict:
+        name, color = import_label[HEADERS[0]], import_label[HEADERS[1]].lstrip('#').lower()
         if not re.match("[0-9a-f]{6}", color):
             raise dclick.LoggedFailure('Bad color <{}> for label "{}"'.format(color, name))
         if name in import_labels and color != import_labels[name]:
