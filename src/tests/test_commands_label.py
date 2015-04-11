@@ -30,6 +30,7 @@ from click.testing import CliRunner
 
 from markers import *
 from gh_commander import github
+from gh_commander._compat import text_type
 from gh_commander.commands import label
 
 #
@@ -149,7 +150,10 @@ def test_command_label_import_takes_all_explicit_formats_correctly(tmpdir, apimo
 
         testfile = tmpdir.join("explicit-{}.dat".format(serializer))
         with testfile.open('wb') as handle:
-            handle.write(getattr(tabdata, serializer))
+            text = getattr(tabdata, serializer)
+            if isinstance(text, text_type):
+                text = text.encode('utf-8')
+            handle.write(text)
 
         result = runner.invoke(label.label_import, ('--format', serializer, "jhermann/sandbox", "from", str(testfile)))
         # print(serializer, result); print(vars(result)); print(result.output)

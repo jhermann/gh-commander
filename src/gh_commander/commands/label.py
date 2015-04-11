@@ -172,7 +172,7 @@ def export(ctx, repo, outfile, serializer):
     help="Input format (defaults to extension of INFILE).",
 )
 @click.argument('repo', nargs=-1)
-@click.argument('infile', type=click.File('rb'))
+@click.argument('infile', type=click.File('r'))
 @click.pass_context
 def label_import(ctx, repo, infile, serializer):
     """Import labels to the given repo(s) out of a file."""
@@ -187,7 +187,7 @@ def label_import(ctx, repo, infile, serializer):
     if serializer is None:
         _, ext = os.path.splitext(inname or '<stream>')
         ext = ext.lstrip('.')
-        if ext in SERIALIZERS:
+        if ext in DESERIALIZERS:
             serializer = ext
         else:
             raise UsageError('No --format given, and extension of "{}" is not one of {}.'
