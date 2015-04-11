@@ -1,6 +1,7 @@
 - {Color: '#00bb00', Name: '#1'}
 - {Color: '#119966', Name: '#2'}
 - {Color: '#775511', Name: '#3'}
+- {Color: '#e11d21', Name: blocker}
 - {Color: '#fc2929', Name: bug}
 - {Color: '#eb6420', Name: defect}
 - {Color: '#666666', Name: docs}
