@@ -1,7 +1,7 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, unused-wildcard-import, missing-docstring
 # pylint: disable=redefined-outer-name, no-self-use, bad-continuation
-# pylint: disable=unused-argument, bad-whitespace, invalid-name
+# pylint: disable=unused-argument, bad-whitespace, invalid-name, protected-access
 """ Test 'label' sub-commands.
 
     See http://click.pocoo.org/3/testing/
@@ -152,7 +152,7 @@ def test_command_label_import_takes_all_explicit_formats_correctly(tmpdir, apimo
             handle.write(getattr(tabdata, serializer))
 
         result = runner.invoke(label.label_import, ('--format', serializer, "jhermann/sandbox", "from", str(testfile)))
-        #print(serializer, result); print(vars(result)); print(result.output)
+        # print(serializer, result); print(vars(result)); print(result.output)
 
         assert result.exit_code == 0, "Exit code OK for " + serializer
         assert len(result.output) >= 0, "Non-empty stdout for " + serializer
@@ -165,7 +165,7 @@ def test_command_label_import_reports_non_existing_repo(apimock):
     apimock.repository = lambda user, repo: None
 
     result = runner.invoke(label.label_import, ('--format', 'csv', "does-not/exist", "from", os.devnull))
-    #print(result); print(vars(result)); print(result.output)
+    # print(result); print(vars(result)); print(result.output)
 
     assert result.exit_code == 0, "Exit code OK for non-existing repo"
     assert 'Non-existing repo' in result.output, "Warning 'Non-existing repo' is printed"
@@ -180,7 +180,7 @@ def test_command_label_import_creates_a_new_label_and_reports_unique_ones(tmpdir
         handle.write(b"- {Color: '#123456', Name: 'new-test-label'}")
 
     result = runner.invoke(label.label_import, ("what/ever", "from", str(testfile)))
-    print(result); print(vars(result)); print(result.output); print(apimock._recorder)
+    # print(result); print(vars(result)); print(result.output); print(apimock._recorder)
 
     assert result.exit_code == 0, "Exit code OK for new + unqiue label check"
     assert len(apimock._recorder) == 1
