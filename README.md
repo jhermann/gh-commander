@@ -100,7 +100,39 @@ grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
 
 ## A Practical Example
 
-**TODO** Bash script that syncs issue labels in all of a user's projects with a master project.
+The following shows how to ease the management of a bunch of projects,
+in this case an [Invoke](http://www.pyinvoke.org/) task that synchronizes labels
+across a set of projects from a master definition.
+
+```py
+import os
+import tempfile
+
+import requests
+from invoke import ctask as task
+
+PROJECTS = """
+    my/project
+    my/other-project
+"""
+PROJECTS = [i.strip() for i in PROJECTS.splitlines() if i]
+LABEL_MASTER_URL = 'https://raw.githubusercontent.com/jhermann/gh-commander/master/examples/labels.yaml'
+
+
+@task(name='sync-labels')
+def sync_labels(ctx):
+    """Sync labels into managed projects."""
+    labels_yaml = requests.get(LABEL_MASTER_URL).text
+    with tempfile.NamedTemporaryFile(suffix='.yaml', prefix='gh-label-sync-', delete=False) as handle:
+        handle.write(labels_yaml)
+
+    try:
+        ctx.run('gh label import {} from {}'.format(' '.join(PROJECTS), handle.name))
+    finally:
+        os.remove(handle.name)
+```
+
+See this [tasks.py](https://github.com/jhermann/Stack-O-Waffles/blob/master/tasks.py) for the real-world use case.
 
 
 ## Configuration
