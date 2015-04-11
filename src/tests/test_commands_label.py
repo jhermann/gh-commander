@@ -21,7 +21,10 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
+
 import pytest
+import tablib
 from bunch import Bunch
 from click.testing import CliRunner
 
@@ -29,6 +32,9 @@ from markers import *
 from gh_commander import github
 from gh_commander.commands import label
 
+#
+# Helpers
+#
 
 MOCK_DATA = [
     Bunch(name='this-is-a-mocked-test', color='123456'),
@@ -40,15 +46,22 @@ MOCK_DATA = [
 @pytest.fixture
 def apimock():
     """Mocked GitHub API."""
+    recorder = []
     github.api.memo.__dict__.setdefault('conns', {})
     github.api.memo.conns[None] = Bunch(
+        _recorder = recorder,
         gh_config = Bunch(user='jhermann'),
         repository = lambda user, repo: Bunch(
             labels = lambda: MOCK_DATA,
+            create_label = lambda *args: recorder.append(('create', args)) or True,
         ),
     )
     return github.api.memo.conns[None]
 
+
+#
+# 'label list'
+#
 
 @cli
 def test_command_label_list_uses_the_mocked_data(tmpdir, apimock):
@@ -61,6 +74,10 @@ def test_command_label_list_uses_the_mocked_data(tmpdir, apimock):
     assert 'this-is-a-mocked-test' in result.output, "Mocked name appears in output"
     assert '#123456' in result.output, "Mocked color appears in output"
 
+
+#
+# 'label export'
+#
 
 @cli
 def test_command_label_export_takes_all_explicit_formats_correctly(tmpdir, apimock):
@@ -116,3 +133,58 @@ def test_command_label_export_to_dash_without_format_fails(apimock):
     result = runner.invoke(label.export, ("waif", '-'))
 
     assert result.exit_code > 0, "Exit code indicates error for unknown format with stdout"
+
+
+#
+# 'label import'
+#
+
+@cli
+def test_command_label_import_takes_all_explicit_formats_correctly(tmpdir, apimock):
+    runner = CliRunner()
+    for serializer in label.DESERIALIZERS:
+        tabdata = tablib.Dataset()
+        tabdata.headers = label.HEADERS
+        tabdata.extend((i.name, i.color) for i in MOCK_DATA)
+
+        testfile = tmpdir.join("explicit-{}.dat".format(serializer))
+        with testfile.open('wb') as handle:
+            handle.write(getattr(tabdata, serializer))
+
+        result = runner.invoke(label.label_import, ('--format', serializer, "jhermann/sandbox", "from", str(testfile)))
+        #print(serializer, result); print(vars(result)); print(result.output)
+
+        assert result.exit_code == 0, "Exit code OK for " + serializer
+        assert len(result.output) >= 0, "Non-empty stdout for " + serializer
+        assert 'No changes' in result.output, "Labels are unmodified"
+
+
+@cli
+def test_command_label_import_reports_non_existing_repo(apimock):
+    runner = CliRunner()
+    apimock.repository = lambda user, repo: None
+
+    result = runner.invoke(label.label_import, ('--format', 'csv', "does-not/exist", "from", os.devnull))
+    #print(result); print(vars(result)); print(result.output)
+
+    assert result.exit_code == 0, "Exit code OK for non-existing repo"
+    assert 'Non-existing repo' in result.output, "Warning 'Non-existing repo' is printed"
+
+
+@cli
+def test_command_label_import_creates_a_new_label_and_reports_unique_ones(tmpdir, apimock):
+    runner = CliRunner()
+
+    testfile = tmpdir.join("create.yaml")
+    with testfile.open('wb') as handle:
+        handle.write(b"- {Color: '#123456', Name: 'new-test-label'}")
+
+    result = runner.invoke(label.label_import, ("what/ever", "from", str(testfile)))
+    print(result); print(vars(result)); print(result.output); print(apimock._recorder)
+
+    assert result.exit_code == 0, "Exit code OK for new + unqiue label check"
+    assert len(apimock._recorder) == 1
+    assert apimock._recorder[0] == ('create', ('new-test-label', u'123456')), "Label is added"
+    assert 'Created label "new-test-label" with color #123456' in result.output, "Added label is reported"
+    assert 'Unique labels in this repo: duplicate, enhancement, this-is-a-mocked-test' in result.output, \
+           "Unique label names are reported"

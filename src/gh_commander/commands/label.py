@@ -62,18 +62,20 @@ DEFAULT_TABLE_FORMAT = [
 ]
 
 
-def get_labels(api, repo, raw=False):
-    """Get label dataset for a repo."""
+def get_repo(api, repo):
+    """Get account name, repo name, and repository object from name ``repo``."""
     if '/' in repo:
         user, repo = repo.split('/', 1)
     else:
         user = api.gh_config.user
-    gh_repo = api.repository(user, repo)
-    if raw:
-        return user, repo, gh_repo.labels()
-    else:
-        data = sorted((label.name, '#' + label.color) for label in gh_repo.labels())
-        return user, repo, data
+    return user, repo, api.repository(user, repo)
+
+
+def get_labels(api, repo):
+    """Get label dataset for a repo."""
+    user, repo, gh_repo = get_repo(api, repo)
+    data = sorted((label.name, '#' + label.color) for label in gh_repo.labels())
+    return user, repo, data
 
 
 def dump_labels(api, repo):
@@ -210,18 +212,18 @@ def label_import(ctx, repo, infile, serializer):
 
     # Update given repos
     for reponame in repo:
-        labels = import_labels.copy()
-        changed = False
-        unique = {}
-        user, repo, repo_labels = get_labels(api, reponame, raw=True)
-        click.secho('⎇   {}/{}'.format(user, repo), fg='white', bg='blue', bold=True)
-        gh_repo = api.repository(user, repo)
+        user, repo, gh_repo = get_repo(api, reponame)
         if not gh_repo:
             click.secho('ERR  Non-existing repo!', fg='black', bg='yellow', bold=True)
             continue
 
+        labels = import_labels.copy()
+        changed = False
+        unique = {}
+        click.secho('⎇   {}/{}'.format(user, repo), fg='white', bg='blue', bold=True)
+
         # Check if existing labels need updating
-        for existing in repo_labels:
+        for existing in gh_repo.labels():
             if existing.name in labels:
                 if existing.color != labels[existing.name]:
                     status = 'OK' if existing.update(existing.name, labels[existing.name]) else 'ERR'
