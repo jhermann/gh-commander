@@ -71,34 +71,7 @@ $ gh label export waif rituals to labels.xls
 ![labels.xls](https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/label_export_excel.png)
 
 
-## Installation
-
-*GitHub Commander* can be installed via ``pip install gh-commander`` as usual,
-see [releases](https://github.com/jhermann/gh-commander/releases) for an overview of available versions.
-To get a bleeding-edge version from source, use these commands:
-
-```sh
-repo="jhermann/gh-commander"
-pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
-pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
-```
-
-See [Contributing](#contributing) on how to create a full development environment.
-
-To add bash completion, read the [Click docs](http://click.pocoo.org/4/bashcomplete/#activation) about it,
-or just follow these instructions:
-
-```sh
-cmdname=gh
-mkdir -p ~/.bash_completion.d
-_$(tr a-z A-Z <<<"$cmdname")_COMPLETE=source $cmdname >~/.bash_completion.d/$cmdname.sh
-grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
-    || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
-. "/etc/bash_completion"
-```
-
-
-## A Practical Example
+## A Practical Use-Case
 
 The following shows how to ease the management of a bunch of projects,
 in this case an [Invoke](http://www.pyinvoke.org/) task that synchronizes labels
@@ -132,7 +105,34 @@ def sync_labels(ctx):
         os.remove(handle.name)
 ```
 
-See this [tasks.py](https://github.com/jhermann/Stack-O-Waffles/blob/master/tasks.py) for the real-world use case.
+See this [tasks.py](https://github.com/jhermann/Stack-O-Waffles/blob/master/tasks.py) for the real-world application.
+
+
+## Installation
+
+*GitHub Commander* can be installed via ``pip install gh-commander`` as usual,
+see [releases](https://github.com/jhermann/gh-commander/releases) for an overview of available versions.
+To get a bleeding-edge version from source, use these commands:
+
+```sh
+repo="jhermann/gh-commander"
+pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
+pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
+```
+
+See [Contributing](#contributing) on how to create a full development environment.
+
+To add bash completion, read the [Click docs](http://click.pocoo.org/4/bashcomplete/#activation) about it,
+or just follow these instructions:
+
+```sh
+cmdname=gh
+mkdir -p ~/.bash_completion.d
+_$(tr a-z A-Z <<<"$cmdname")_COMPLETE=source $cmdname >~/.bash_completion.d/$cmdname.sh
+grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
+    || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
+. "/etc/bash_completion"
+```
 
 
 ## Configuration
