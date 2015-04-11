@@ -214,7 +214,7 @@ def label_import(ctx, repo, infile, serializer):
     for reponame in repo:
         user, repo, gh_repo = get_repo(api, reponame)
         if not gh_repo:
-            click.secho('ERR  Non-existing repo!', fg='black', bg='yellow', bold=True)
+            click.secho('ERR  Non-existing repo "{}"!'.format(reponame), fg='black', bg='yellow', bold=True)
             continue
 
         labels = import_labels.copy()
