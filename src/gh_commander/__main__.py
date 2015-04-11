@@ -40,7 +40,7 @@ def license_option(*param_decls, **attrs):
     """``--license`` option that prints license information and then exits."""
     def decorator(func):
         "decorator inner wrapper"
-        def callback(ctx, _, value):
+        def callback(ctx, _dummy, value):
             "click option callback"
             if not value or ctx.resilient_parsing:
                 return
@@ -73,7 +73,7 @@ def cli(quiet=False, verbose=False, config=None):  # pylint: disable=unused-argu
 
 # Import sub-commands to define them AFTER `cli` is defined
 config.cli = cli
-from . import commands as _  # pylint: disable=unused-import
+from . import commands as _  # noqa pylint: disable=unused-import
 
 if __name__ == "__main__":  # imported via "python -m"?
     __package__ = 'gh_commander'  # pylint: disable=redefined-builtin
