@@ -75,7 +75,8 @@ $ gh label export waif rituals to labels.xls
 
 The following shows how to ease the management of a bunch of projects,
 via an [Invoke](http://www.pyinvoke.org/) task that synchronizes labels
-across a set of projects from a master definition.
+across a set of projects from a
+[master definition](https://github.com/jhermann/gh-commander/blob/master/examples/labels.yaml).
 
 ```py
 import os
