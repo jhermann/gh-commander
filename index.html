@@ -1,44 +1,55 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>GitHub Commander by jhermann</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>GitHub Commander</h1>
-        <p>GitHub Commander is a tool to access the GitHub APIv3 from the CLI and automate otherwise tedious tasks.</p>
-        <p class="view"><a href="https://github.com/jhermann/gh-commander">View the Project on GitHub <small>jhermann/gh-commander</small></a></p>
-        <ul>
-          <li><a href="https://github.com/jhermann/gh-commander/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/jhermann/gh-commander/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/jhermann/gh-commander">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p><img src="https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/logo-64.png" alt="logo">
- 
- <a href="https://travis-ci.org/jhermann/gh-commander"><img src="https://api.travis-ci.org/jhermann/gh-commander.svg" alt="Travis CI"></a>
- <a href="https://github.com/jhermann/gh-commander/issues"><img src="https://img.shields.io/github/issues/jhermann/gh-commander.svg" alt="GitHub Issues"></a>
- <a href="https://github.com/jhermann/gh-commander/blob/master/LICENSE"><img src="https://img.shields.io/pypi/l/gh-commander.svg" alt="License"></a>
- <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://img.shields.io/pypi/v/gh-commander.svg" alt="Latest Version"></a>
- <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://img.shields.io/pypi/dw/gh-commander.svg" alt="Downloads"></a></p>
+    <section class="page-header">
+      <h1 class="project-name">GitHub Commander</h1>
+      <h2 class="project-tagline">GitHub Commander is a tool to access the GitHub APIv3 from the CLI and automate otherwise tedious tasks.</h2>
+      <a href="https://github.com/jhermann/gh-commander" class="btn">View on GitHub</a>
+      <a href="https://github.com/jhermann/gh-commander/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jhermann/gh-commander/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <table>
+<thead>
+<tr>
+<th align="center"><img src="https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/logo-64.png" alt="logo"></th>
+<th align="left">
+<em>GitHub Commander</em> is a tool to access the <a href="https://developer.github.com/v3/">GitHub API v3</a> from the CLI and automate otherwise tedious tasks.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>Project</strong></td>
+<td align="left"> <a href="https://groups.google.com/forum/#!forum/gh-commander"><img src="https://img.shields.io/badge/Google_groups-gh--commander-orange.svg" alt="Groups"></a> <a href="https://github.com/jhermann/gh-commander/blob/master/LICENSE"><img src="https://img.shields.io/pypi/l/gh-commander.svg" alt="License"></a> <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://pypip.in/status/gh-commander/badge.svg" alt="Development Status"></a>
+</td>
+</tr>
+<tr>
+<td align="center"><strong>QA</strong></td>
+<td align="left"> <a href="https://travis-ci.org/jhermann/gh-commander"><img src="https://api.travis-ci.org/jhermann/gh-commander.svg" alt="Travis CI"></a> <a href="https://coveralls.io/r/jhermann/gh-commander"><img src="https://img.shields.io/coveralls/jhermann/gh-commander.svg" alt="Coveralls"></a> <a href="https://github.com/jhermann/gh-commander/issues"><img src="https://img.shields.io/github/issues/jhermann/gh-commander.svg" alt="GitHub Issues"></a>
+</td>
+</tr>
+<tr>
+<td align="center"><strong>Release</strong></td>
+<td align="left"> <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://img.shields.io/pypi/v/gh-commander.svg" alt="Latest Version"></a> <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://pypip.in/format/gh-commander/badge.svg" alt="Download format"></a> <a href="https://pypi.python.org/pypi/gh-commander/"><img src="https://img.shields.io/pypi/dw/gh-commander.svg" alt="Downloads"></a>
+</td>
+</tr>
+</tbody>
+</table>
 
 <h2>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>GitHub Commander implements the <code>gh</code> command line tool,
+<p><em>GitHub Commander</em> implements the <code>gh</code> command line tool,
 which provides a ‘fluent’ interface
 using <a href="https://github.com/mitsuhiko/click">click</a>
 (see <a href="#usage">Usage</a> below).
@@ -47,7 +58,7 @@ It allows to access the
 from a shell prompt for things usually done in the browser,
 and also automates tasks that otherwise are tedious at best,
 when done by clicking around on a web page.
-GitHub Commander is powered by <a href="https://github.com/PyGithub/PyGithub">PyGithub</a>.</p>
+<em>GitHub Commander</em> is powered by <a href="https://github.com/sigmavirus24/github3.py">github3.py</a>.</p>
 
 <table>
 <thead>
@@ -61,14 +72,132 @@ GitHub Commander is powered by <a href="https://github.com/PyGithub/PyGithub">Py
 </table>
 
 <h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
 
-<p>See <a href="#contributing">Contributing</a> for now.</p>
+<p>To give you a quick impression of what this tool can do for you, here are some example calls:</p>
+
+<div class="highlight highlight-sh"><pre>$ gh user show foo
+ACCOUNT     Maciek Pacut [foo / User <span class="pl-c">#33384]</span>
+SINCE/LAST  2008-11-08T18:01:02Z / 2015-03-30T21:35:31Z
+URL         https://api.github.com/users/foo
+EMAIL       maciek.pacut@gmail.com
+REPOS/GISTS 14 ☑ ⎇  / -1 ☒ ⎇  / 0 ☑ ✍ / -1 ☒ ✍
+STATS       ⇦ ⋮ 1 / ⇨ ⋮ 0 / -1 ◔
+
+$ gh label ls foo/ii
+⎇   foo/ii
+┌─────────────┬─────────┐
+│ Name        │ Color   │
+├─────────────┼─────────┤
+│ maciekpacut │ <span class="pl-c">#000000 │</span>
+└─────────────┴─────────┘
+
+$ gh label <span class="pl-k">export</span> --format yaml jhermann/gh-commander to -
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#fc2929<span class="pl-pds">'</span></span>, Name: bug}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#cccccc<span class="pl-pds">'</span></span>, Name: duplicate}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#84b6eb<span class="pl-pds">'</span></span>, Name: enhancement}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#159818<span class="pl-pds">'</span></span>, Name: <span class="pl-c1">help</span> wanted}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#ededed<span class="pl-pds">'</span></span>, Name: <span class="pl-k">in</span> progress}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#e6e6e6<span class="pl-pds">'</span></span>, Name: invalid}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#cc317c<span class="pl-pds">'</span></span>, Name: question}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#ededed<span class="pl-pds">'</span></span>, Name: ready}
+- {Color: <span class="pl-s"><span class="pl-pds">'</span>#ffffff<span class="pl-pds">'</span></span>, Name: wontfix}
+
+$ gh label <span class="pl-k">export</span> waif rituals to labels.xls</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/label_export_excel.png" alt="labels.xls"></p>
 
 <h2>
-<a id="a-practical-example" class="anchor" href="#a-practical-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Practical Example</h2>
+<a id="a-practical-use-case" class="anchor" href="#a-practical-use-case" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Practical Use-Case</h2>
 
-<p><strong>TODO</strong> Bash script that syncs issue labels in all of a user's projects with a master project.</p>
+<p>The following shows how to ease the management of a bunch of projects,
+via an <a href="http://www.pyinvoke.org/">Invoke</a> task that synchronizes labels
+across a set of projects from a
+<a href="https://github.com/jhermann/gh-commander/blob/master/examples/labels.yaml">master definition</a>.</p>
+
+<div class="highlight highlight-py"><pre><span class="pl-k">import</span> os
+<span class="pl-k">import</span> tempfile
+
+<span class="pl-k">import</span> requests
+<span class="pl-k">from</span> invoke <span class="pl-k">import</span> ctask <span class="pl-k">as</span> task
+
+PROJECTS <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"""</span></span>
+<span class="pl-s">    my/project</span>
+<span class="pl-s">    my/other-project</span>
+<span class="pl-s"><span class="pl-pds">"""</span></span>
+PROJECTS <span class="pl-k">=</span> [i.strip() <span class="pl-k">for</span> i <span class="pl-k">in</span> PROJECTS.splitlines() <span class="pl-k">if</span> i]
+LABEL_MASTER_URL <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>https://raw.githubusercontent.com/jhermann/gh-commander/master/examples/labels.yaml<span class="pl-pds">'</span></span>
+
+
+<span class="pl-en">@</span><span class="pl-en">task</span>(<span class="pl-smi">name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>sync-labels<span class="pl-pds">'</span></span>)
+<span class="pl-k">def</span> <span class="pl-en">sync_labels</span>(<span class="pl-smi">ctx</span>):
+    <span class="pl-s"><span class="pl-pds">"""</span>Sync labels into managed projects.<span class="pl-pds">"""</span></span>
+    labels_yaml <span class="pl-k">=</span> requests.get(LABEL_MASTER_URL).text
+    <span class="pl-k">with</span> tempfile.NamedTemporaryFile(<span class="pl-smi">suffix</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>.yaml<span class="pl-pds">'</span></span>, <span class="pl-smi">prefix</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>gh-label-sync-<span class="pl-pds">'</span></span>, <span class="pl-smi">delete</span><span class="pl-k">=</span><span class="pl-c1">False</span>) <span class="pl-k">as</span> handle:
+        handle.write(labels_yaml)
+
+    <span class="pl-k">try</span>:
+        ctx.run(<span class="pl-s"><span class="pl-pds">'</span>gh label import <span class="pl-c1">{}</span> from <span class="pl-c1">{}</span><span class="pl-pds">'</span></span>.format(<span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span>.join(PROJECTS), handle.name))
+    <span class="pl-k">finally</span>:
+        os.remove(handle.name)</pre></div>
+
+<p>See this <a href="https://github.com/jhermann/Stack-O-Waffles/blob/master/tasks.py">tasks.py</a> for the real-world application.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><em>GitHub Commander</em> can be installed via <code>pip install gh-commander</code> as usual,
+see <a href="https://github.com/jhermann/gh-commander/releases">releases</a> for an overview of available versions.
+To get a bleeding-edge version from source, use these commands:</p>
+
+<div class="highlight highlight-sh"><pre>repo=<span class="pl-s"><span class="pl-pds">"</span>jhermann/gh-commander<span class="pl-pds">"</span></span>
+pip install -r <span class="pl-s"><span class="pl-pds">"</span>https://raw.githubusercontent.com/<span class="pl-smi">$repo</span>/master/requirements.txt<span class="pl-pds">"</span></span>
+pip install -UI -e <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/<span class="pl-smi">$repo</span>.git#egg=<span class="pl-smi">${repo<span class="pl-k">#*/</span>}</span><span class="pl-pds">"</span></span></pre></div>
+
+<p>See <a href="#contributing">Contributing</a> on how to create a full development environment.</p>
+
+<p>To add bash completion, read the <a href="http://click.pocoo.org/4/bashcomplete/#activation">Click docs</a> about it,
+or just follow these instructions:</p>
+
+<div class="highlight highlight-sh"><pre>cmdname=gh
+mkdir -p <span class="pl-k">~</span>/.bash_completion.d
+_<span class="pl-s"><span class="pl-pds">$(</span>tr a-z A-Z <span class="pl-k">&lt;&lt;&lt;</span><span class="pl-s"><span class="pl-pds">"</span>$cmdname<span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>_COMPLETE=<span class="pl-c1">source</span> <span class="pl-smi">$cmdname</span> <span class="pl-k">&gt;</span>~/.bash_completion.d/<span class="pl-smi">$cmdname</span>.sh
+grep /.bash_completion.d/<span class="pl-smi">$cmdname</span>.sh <span class="pl-k">~</span>/.bash_completion <span class="pl-k">&gt;</span>/dev/null \
+    <span class="pl-k">||</span> <span class="pl-c1">echo</span> <span class="pl-k">&gt;&gt;</span>~/.bash_completion <span class="pl-s"><span class="pl-pds">"</span>. ~/.bash_completion.d/<span class="pl-smi">$cmdname</span>.sh<span class="pl-pds">"</span></span>
+<span class="pl-c1">.</span> <span class="pl-s"><span class="pl-pds">"</span>/etc/bash_completion<span class="pl-pds">"</span></span></pre></div>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<h3>
+<a id="login-credentials" class="anchor" href="#login-credentials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Login Credentials</h3>
+
+<p>Before you can use <em>GitHub Commander</em>, you have to provide some minimal configuration,
+most importantly credentials for API access. The recommended way for doing so is this:</p>
+
+<ol>
+<li>In the <a href="https://github.com/settings/applications">Settings › Applications</a> of your GitHub account,
+press the “Generate new token” button of the “Personal access tokens” section, and follow the instructions.
+Copy the generated token to the clipboard, for use in the next step.</li>
+<li>
+<p>Create the file <code>~/.netrc</code> with the following contents (or add that to the existing file):</p>
+
+<pre><code>machine api.github.com
+    user «your GitHub username»
+    password «your personal access token»
+</code></pre>
+</li>
+<li><p>Call <code>chmod 600 ~/.netrc</code> to protect your sensitive data.</p></li>
+</ol>
+
+<p>This way, the sensitive authentication information is separate from the rest of the configuration.
+Use the <code>gh help</code> command to check whether your credentials actually work
+– if they do, your GitHub user information is displayed, otherwise you'll get an error indicator.</p>
+
+<h3>
+<a id="main-configuration-file" class="anchor" href="#main-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main Configuration File</h3>
+
+<p><strong>TODO</strong></p>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
@@ -80,6 +209,8 @@ in the hope that it's quite obvious what they do.</p>
 <h3>
 <a id="general-options" class="anchor" href="#general-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Options</h3>
 
+<p>These options must appear before any sub-command, directly after <code>gh</code>.</p>
+
 <ul>
 <li>
 <code>--user ‹account name›</code> – Override account name from config.</li>
@@ -90,20 +221,59 @@ in the hope that it's quite obvious what they do.</p>
 </ul>
 
 <h3>
+<a id="common-options" class="anchor" href="#common-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common Options</h3>
+
+<p>Many of the commands do similar things, like exporting data.
+That fact is reflected in some shared options that always behave the same.
+See the <code>--help</code> message of every command for details and specific options.</p>
+
+<ul>
+<li>
+<code>--format ‹choice›</code> – Specifies the output format to use, but is only
+needed in absence of a filename with a clear extension. The choices are
+<code>json</code>, <code>yaml</code>, <code>csv</code>, <code>xls</code>, and <code>dbf</code>.</li>
+</ul>
+
+<h3>
 <a id="common-arguments" class="anchor" href="#common-arguments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common Arguments</h3>
 
 <ul>
 <li>
-<code>‹repo›</code> – A repository name, either fully qualified in the form <code>‹account›/‹repo›</code>, or else a plain repository name assumed to be owned by the current user.</li>
+<code>‹repo›</code> – A repository name, either fully qualified in the form
+<code>‹account›/‹repo›</code>, or else a plain repository name assumed to be
+owned by the current user.</li>
 </ul>
 
 <h3>
 <a id="labels" class="anchor" href="#labels" aria-hidden="true"><span class="octicon octicon-link"></span></a>Labels</h3>
 
 <ul>
-<li><code>gh labels list ‹repo›…</code></li>
-<li><code>gh labels export ‹repo› [to] ‹filename›</code></li>
-<li><code>gh labels import ‹repo› [from] ‹filename›</code></li>
+<li>
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> <code>gh label list ‹repo›…</code>
+</li>
+<li>
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> <code>gh label export [--format=…] ‹repo›… [to] ‹filename.ext›</code>
+</li>
+<li>
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> <code>gh label import ‹repo› [from] ‹filename.ext›</code>
+</li>
+</ul>
+
+<h3>
+<a id="users" class="anchor" href="#users" aria-hidden="true"><span class="octicon octicon-link"></span></a>Users</h3>
+
+<ul>
+<li>
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> <code>gh user show [‹username›…]</code>
+</li>
+</ul>
+
+<h3>
+<a id="miscellaneous" class="anchor" href="#miscellaneous" aria-hidden="true"><span class="octicon octicon-link"></span></a>Miscellaneous</h3>
+
+<ul>
+<li>
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> <code>gh help</code> – Show information about the installation &amp; configuration, and how to get further help.</li>
 </ul>
 
 <h2>
@@ -111,20 +281,51 @@ in the hope that it's quite obvious what they do.</p>
 
 <p>To create a working directory for this project, call these commands:</p>
 
-<div class="highlight highlight-sh"><pre>git clone <span class="pl-s1"><span class="pl-pds">"</span>https://github.com/jhermann/gh-commander.git<span class="pl-pds">"</span></span>
-<span class="pl-s3">cd</span> <span class="pl-s1"><span class="pl-pds">"</span>gh-commander<span class="pl-pds">"</span></span>
-<span class="pl-s3">.</span> .env <span class="pl-c"># answer the prompt with (y)es</span>
-invoke build --docs</pre></div>
+<div class="highlight highlight-sh"><pre>git clone <span class="pl-s"><span class="pl-pds">"</span>https://github.com/jhermann/gh-commander.git<span class="pl-pds">"</span></span>
+<span class="pl-c1">cd</span> <span class="pl-s"><span class="pl-pds">"</span>gh-commander<span class="pl-pds">"</span></span>
+<span class="pl-c1">.</span> .env --yes --develop
+invoke ci</pre></div>
 
-<p>See <a href="https://github.com/jhermann/gh-commander/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for more.</p>
+<p>See <a href="https://github.com/jhermann/gh-commander/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> for more.</p>
+
+<p><a href="https://waffle.io/jhermann/gh-commander/metrics"><img src="https://graphs.waffle.io/jhermann/gh-commander/throughput.svg" alt="Throughput Graph"></a></p>
 
 <h2>
 <a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h2>
 
+<p><strong>General</strong></p>
+
 <ul>
 <li><a href="https://developer.github.com/v3/">GitHub API v3</a></li>
-<li><a href="https://github.com/PyGithub/PyGithub">PyGithub</a></li>
-<li><a href="https://github.com/mitsuhiko/click">click</a></li>
+</ul>
+
+<p><strong>Similar Projects</strong></p>
+
+<ul>
+<li><a href="https://github.com/sigmavirus24/github-cli">sigmavirus24/github-cli</a></li>
+</ul>
+
+<p><strong>Tools</strong></p>
+
+<ul>
+<li><a href="http://cookiecutter.readthedocs.org/en/latest/">Cookiecutter</a></li>
+<li><a href="http://www.pyinvoke.org/">PyInvoke</a></li>
+<li><a href="http://pytest.org/latest/contents.html">pytest</a></li>
+<li><a href="https://tox.readthedocs.org/en/latest/">tox</a></li>
+<li><a href="http://docs.pylint.org/">Pylint</a></li>
+<li><a href="https://github.com/pypa/twine#twine">twine</a></li>
+<li><a href="http://docs.bpython-interpreter.org/">bpython</a></li>
+<li><a href="https://github.com/myint/yolk#yolk">yolk3k</a></li>
+</ul>
+
+<p><strong>Packages</strong></p>
+
+<ul>
+<li><a href="http://github3py.readthedocs.org/">github3.py</a></li>
+<li><a href="https://jhermann.github.io/rituals">Rituals</a></li>
+<li><a href="http://click.pocoo.org/">Click</a></li>
+<li><a href="http://amoffat.github.io/sh/">sh</a></li>
+<li><a href="http://docs.python-tablib.org/en/latest/">tablib</a></li>
 </ul>
 
 <h2>
@@ -133,13 +334,16 @@ invoke build --docs</pre></div>
 <ul>
 <li>Logo elements from <a href="http://www.clker.com/">clker.com Free Clipart</a>.</li>
 </ul>
-      </section>
-    </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/jhermann">jhermann</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jhermann/gh-commander">GitHub Commander</a> is maintained by <a href="https://github.com/jhermann">jhermann</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
+
