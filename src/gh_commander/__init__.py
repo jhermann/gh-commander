@@ -2,8 +2,7 @@
 # pylint: disable=bad-whitespace
 # flake8: noqa
 """
-    GitHub Commander – A tool to access the GitHub APIv3
-    from the CLI and automate otherwise tedious tasks.
+    Simplify your life and manage your GitHub projects with ease.
 
     “GitHub Commander” implements the ``gh`` command line tool,
     which provides a ‘fluent’ interface using Click.
