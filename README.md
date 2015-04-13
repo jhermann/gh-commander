@@ -120,7 +120,8 @@ or just follow these instructions:
 ```sh
 cmdname=gh
 mkdir -p ~/.bash_completion.d
-_$(tr a-z A-Z <<<"$cmdname")_COMPLETE=source $cmdname >~/.bash_completion.d/$cmdname.sh
+( export _$(tr a-z A-Z <<<"$cmdname")_COMPLETE=source ; \
+  $cmdname >~/.bash_completion.d/$cmdname.sh )
 grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
     || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
 . "/etc/bash_completion"
