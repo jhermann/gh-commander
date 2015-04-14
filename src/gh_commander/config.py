@@ -74,7 +74,8 @@ def locations(exists=True, extras=None):
     """Return the location of the config file(s)."""
     result = []
     candidates = [
-        os.path.join(click.get_app_dir(APP_NAME), "config.ini"),
+        '/etc/{}.conf'.format(APP_NAME),
+        os.path.join(click.get_app_dir(APP_NAME) + '.conf'),
     ] + (extras and list(extras) or [])
 
     for config_file  in candidates:
