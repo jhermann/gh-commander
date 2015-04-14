@@ -49,7 +49,7 @@ class GitHubConfig(object):
 
 
     def __init__(self, config=None):
-        """Load configuration, especially authetication."""
+        """Load configuration, especially authentication."""
         # TODO: look into config for non-default values
         self.base_url = os.environ.get('GH_API_BASE_URL', None)
         self.user = None
