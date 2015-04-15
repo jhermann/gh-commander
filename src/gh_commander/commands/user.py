@@ -20,12 +20,18 @@ from __future__ import absolute_import, unicode_literals, print_function
 import click
 
 from .. import config, github
+from ..util import dclick
 
 
 def dump_user(api, username):
     """Dump user information to console."""
     gh_user = api.user(username)
+    if not gh_user:
+        dclick.serror("Unknown user '{}'".format(username))
+        return
+
     userdict = gh_user.as_dict()
+    userdict.setdefault('name', '‹N/A›')
     userdict.setdefault('total_private_repos', -1)
     userdict.setdefault('private_gists', -1)
     userdict.setdefault('disk_usage', -1)
@@ -52,9 +58,8 @@ def user():
 @click.argument('username', nargs=-1)
 def user_show(username=None):
     """Dump information about the logged-in or given user(s)."""
-    api = github.api(config=None)  # TODO: config object
-
-    for idx, username in enumerate(username or [api.gh_config.user]):
-        if idx:
-            click.echo('')
-        dump_user(api, username)
+    with github.open(config=None) as api: # TODO: config object
+        for idx, username in enumerate(username or [api.gh_config.user]):
+            if idx:
+                click.echo('')
+            dump_user(api, username)
