@@ -21,7 +21,9 @@ import os
 import errno
 import threading
 from netrc import netrc, NetrcParseError
+from contextlib import contextmanager
 
+from requests.exceptions import ConnectionError
 from github3 import *  # pylint: disable=wildcard-import
 
 from ._compat import urlparse
@@ -88,8 +90,6 @@ class GitHubConfig(object):
             if cause.errno != errno.ENOENT:
                 raise
             return
-        except NetrcParseError as cause:
-            raise  # TODO: Make this log nicely, not produce a stack trace
 
         auth = None
         if self.user:
@@ -147,3 +147,23 @@ def api(config=None):
     return apiobj
 
 api.memo = threading.local()
+
+
+@contextmanager
+def open(config=None):
+    """ Context manager that provides an API object and nicely reports
+        common runtime errors.
+    """
+    try:
+        apiobj = api(config)
+    except IOError as cause:
+        raise dclick.LoggedFailure("Input error while connecting to GitHub API ({})".format(cause))
+    except NetrcParseError as cause:
+        raise dclick.LoggedFailure("Error while parsing credentials ({})".format(cause))
+
+    try:
+        yield apiobj
+    except ConnectionError as cause:
+        raise dclick.LoggedFailure("HTTP connect error ({})".format(cause))
+    except GitHubError as cause:
+        raise dclick.LoggedFailure(pretty_cause(cause, "API"))
