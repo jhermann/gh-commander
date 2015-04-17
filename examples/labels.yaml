@@ -16,6 +16,7 @@
 - {Color: '#bb33cc', Name: question}
 - {Color: '#cceecc', Name: ready}
 - {Color: '#006b75', Name: refactoring}
+- {Color: '#55bbff', Name: requirement}
 - {Color: '#996611', Name: task}
 - {Color: '#339900', Name: tests}
 - {Color: '#f099aa', Name: wontfix}
