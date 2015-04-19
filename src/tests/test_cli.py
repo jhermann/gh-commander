@@ -99,4 +99,4 @@ def test_cmd_help():
 
     assert result.exit_code == 0
     assert 'configuration' in words
-    assert any(i.endswith(os.sep + main.__app_name__ + os.sep + 'config.ini') for i in words)
+    assert any(i.endswith(os.sep + main.__app_name__ + '.conf') for i in words)
