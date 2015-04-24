@@ -1,0 +1,16 @@
+{
+    "email": "jh@web.de",
+    "features": "travis flake8 cli",
+    "full_name": "J\u00fcrgen Hermann",
+    "github_url": "https://github.com/jhermann/gh-commander",
+    "github_username": "jhermann",
+    "keywords": "hosted.by.github github cli tool automation",
+    "license": "Apache 2.0",
+    "pkg_name": "gh_commander",
+    "project_name": "GH Commander",
+    "repo_name": "gh-commander",
+    "short_description": "GitHub Commander is a tool to access the GitHub APIv3 from the CLI and automate otherwise tedious tasks",
+    "url": "https://github.com/jhermann/gh-commander",
+    "version": "0.1.0",
+    "year": "2015"
+}
