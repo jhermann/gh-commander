@@ -8,7 +8,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 import re
 
 import click
+from bunch import Bunch
 
 from . import config
 
@@ -30,6 +31,7 @@ config.APP_NAME = __app_name__
 
 # The `click` custom context settings
 CONTEXT_SETTINGS = dict(
+    obj=Bunch(cfg=None, quiet=False, verbose=False),  # namespace for custom stuff
     help_option_names=['-h', '--help'],
     auto_envvar_prefix=__app_name__.upper().replace('-', '_'),
 )
@@ -66,9 +68,14 @@ def license_option(*param_decls, **attrs):
 @license_option()
 @click.option('-q', '--quiet', is_flag=True, default=False, help='Be quiet (show only errors).')
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Create extra verbose output.')
-@click.option('-c', '--config', metavar='FILE', multiple=True, type=click.Path(), help='Load given configuration file.')
-def cli(quiet=False, verbose=False, config=None):  # pylint: disable=unused-argument, redefined-outer-name
+@click.option('-c', '--config', "config_paths", metavar='FILE',
+              multiple=True, type=click.Path(), help='Load given configuration file(s).')
+@click.pass_context
+def cli(ctx, quiet=False, verbose=False, config_paths=None):  # pylint: disable=unused-argument
     """GitHub Commander command line tool."""
+    config.Configuration.from_context(ctx, config_paths)
+    ctx.obj.quiet = quiet
+    ctx.obj.verbose = verbose
 
 
 # Import sub-commands to define them AFTER `cli` is defined

@@ -5,6 +5,7 @@
 click==3.3
 colorama==0.3.3
 configobj==5.0.6
+#-e git+https://github.com/jhermann/configobj@move-to-package-32#egg=configobj
 
 #github3.py>=1.0
 -e git+https://github.com/jhermann/github3.py.git@login-with-personal-token#egg=github3.py
@@ -12,3 +13,7 @@ configobj==5.0.6
 tablib==0.10.0
 # TODO: clear up license situation before a final release, or switch to something else
 -e git+https://github.com/sseemayer/qstat-pretty.git#egg=qstatpretty
+
+bunch==1.0.1
+#rudiments==0.1.0
+-e git+https://github.com/jhermann/rudiments#egg=rudiments

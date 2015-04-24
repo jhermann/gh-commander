@@ -46,32 +46,30 @@ def fresh_cookies(ctx, mold=''):
             ".git", ".svn", "*~",
         ))
     else:
-        ctx.run("git clone {} {}".format(mold, tmpdir), echo=True)
+        ctx.run("git clone {} {}".format(mold, tmpdir))
 
     # Copy recorded "cookiecutter.json" into mold
     shutil.copy2("project.d/cookiecutter.json", tmpdir)
 
     with pushd('..'):
-        ctx.run("cookiecutter --no-input {}".format(tmpdir), echo=True)
+        ctx.run("cookiecutter --no-input {}".format(tmpdir))
     if os.path.exists('.git'):
-        ctx.run("git status", echo=True)
+        ctx.run("git status")
 
 namespace.add_task(fresh_cookies)
 
 
-@task(help={
-    'pty': "Whether to run commands under a pseudo-tty",
-})  # pylint: disable=invalid-name
-def ci(ctx, pty=True):
+@task()
+def ci(ctx):  # pylint: disable=invalid-name
     """Perform continuous integration tasks."""
     opts = ['']
 
     # 'tox' makes no sense in Travis
     if os.environ.get('TRAVIS', '').lower() == 'true':
-        opts += ['test']
+        opts += ['test.pytest']
     else:
         opts += ['test.tox']
 
-    ctx.run("invoke clean --all build --docs check --reports{} 2>&1".format(' '.join(opts)), echo=True, pty=pty)
+    ctx.run("invoke --echo --pty clean --all build --docs check --reports{}".format(' '.join(opts)))
 
 namespace.add_task(ci)

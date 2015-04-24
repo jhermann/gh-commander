@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-whitespace, attribute-defined-outside-init, invalid-name
 """
-    gh-commander – GitHub Commander is a tool to access the GitHub APIv3
+    GH Commander – GitHub Commander is a tool to access the GitHub APIv3
     from the CLI and automate otherwise tedious tasks.
 
     This setuptools script follows the DRY principle and tries to
@@ -23,7 +23,7 @@
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -94,7 +94,8 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
                 metadata[match.group(1)] = match.group(3)
 
     if not all(i in metadata for i in expected_keys):
-        raise RuntimeError("Missing or bad metadata in '{0}' package".format(name))
+        raise RuntimeError("Missing or bad metadata in '{0}' package: {1}"
+                           .format(name, ', '.join(sorted(set(expected_keys) - set(metadata.keys()))),))
 
     text = metadata['long_description'].strip()
     if text:

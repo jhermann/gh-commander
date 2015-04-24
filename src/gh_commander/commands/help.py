@@ -8,7 +8,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,23 +18,28 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import os
+import sys
 
-import click
+from rudiments.reamed import click
 from requests.exceptions import ConnectionError
 
 from .. import config, github
-from ..util import pretty_path, dclick
 from .user import dump_user
 
 
 @config.cli.command(name='help')
+@click.option('-c', '--config-dump', is_flag=True, default=False, help='Dump the merged configuration to stdout.')
 @click.pass_context
-def help_command(ctx):
+def help_command(ctx, config_dump=False):
     """Print some information on the system environment."""
     def banner(title):
         "Helper"
         click.echo('')
         click.secho('~~~ {} ~~~'.format(title), fg='green', bg='black', bold=True)
+
+    if config_dump:
+        ctx.obj.cfg.dump()
+        sys.exit(0)
 
     app_name = ctx.find_root().info_name
     click.secho('*** "{}" Help & Information ***'.format(app_name), fg='white', bg='blue', bold=True)
@@ -43,8 +48,8 @@ def help_command(ctx):
     click.echo(config.version_info(ctx))
 
     banner('Configuration')
-    locations = config.locations(exists=False, extras=ctx.find_root().params.get('config', None))
-    locations = [(u'✔' if os.path.exists(i) else u'✘', pretty_path(i)) for i in locations]
+    locations = ctx.obj.cfg.locations(exists=False)
+    locations = [(u'✔' if os.path.exists(i) else u'✘', click.pretty_path(i)) for i in locations]
     click.echo(u'The following configuration files are merged in order, if they exist:\n    {0}'.format(
         u'\n    '.join(u'{}   {}'.format(*i) for i in locations),
     ))
@@ -53,7 +58,7 @@ def help_command(ctx):
     try:
         api = github.api(config=None)  # TODO: config object
     except AssertionError as cause:
-        dclick.serror("AUTH: {}", cause)
+        click.serror("AUTH: {}", cause)
     else:
         try:
             dump_user(api, api.gh_config.user)
@@ -61,9 +66,9 @@ def help_command(ctx):
             fgcol = 'yellow' if limit >= 100 else 'cyan'
             click.secho('\n{} calls remaining in this hour.'.format(limit), fg=fgcol, bg='black', bold=True)
         except ConnectionError as cause:
-            dclick.serror("HTTP: {}", cause)
+            click.serror("HTTP: {}", cause)
         except github.GitHubError as cause:
-            dclick.serror(github.pretty_cause(cause, "API"))
+            click.serror(github.pretty_cause(cause, "API"))
 
     banner('More Help')
     click.echo("Call '{} --help' to get a list of available commands & options.".format(app_name))

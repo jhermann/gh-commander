@@ -150,7 +150,7 @@ api.memo = threading.local()
 
 
 @contextmanager
-def open(config=None):
+def open(config=None):  # pylint: disable=redefined-builtin
     """ Context manager that provides an API object and nicely reports
         common runtime errors.
     """
