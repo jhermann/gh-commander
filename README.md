@@ -3,6 +3,7 @@
 GitHub Commander is a tool to access the GitHub APIv3 from the CLI and automate otherwise tedious tasks.
 
  [![Travis CI](https://api.travis-ci.org/jhermann/gh-commander.svg)](https://travis-ci.org/jhermann/gh-commander)
+ [![Coveralls](https://img.shields.io/coveralls/jhermann/gh-commander.svg)](https://coveralls.io/r/jhermann/gh-commander)
  [![GitHub Issues](https://img.shields.io/github/issues/jhermann/gh-commander.svg)](https://github.com/jhermann/gh-commander/issues)
  [![License](https://img.shields.io/pypi/l/gh-commander.svg)](https://github.com/jhermann/gh-commander/blob/master/LICENSE)
  [![Development Status](https://pypip.in/status/gh-commander/badge.svg)](https://pypi.python.org/pypi/gh-commander/)
@@ -14,6 +15,34 @@ GitHub Commander is a tool to access the GitHub APIv3 from the CLI and automate 
 ## Overview
 
 …
+
+
+## Installation
+
+*GH Commander* can be installed via ``pip install gh-commander`` as usual,
+see [releases](https://github.com/jhermann/gh-commander/releases) for an overview of available versions.
+To get a bleeding-edge version from source, use these commands:
+
+```sh
+repo="jhermann/gh-commander"
+pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
+pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
+```
+
+See [Contributing](#contributing) on how to create a full development environment.
+
+To add bash completion, read the [Click docs](http://click.pocoo.org/4/bashcomplete/#activation) about it,
+or just follow these instructions:
+
+```sh
+cmdname=gh-commander
+mkdir -p ~/.bash_completion.d
+( export _$(tr a-z- A-Z_ <<<"$cmdname")_COMPLETE=source ; \
+  $cmdname >~/.bash_completion.d/$cmdname.sh )
+grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
+    || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
+. "/etc/bash_completion"
+```
 
 
 ## Usage

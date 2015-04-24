@@ -1,6 +1,6 @@
-# *- coding: utf-8 -*-
-# pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-""" Test the package metadata.
+# -*- coding: utf-8 -*-
+# pylint: disable=bad-continuation, unused-import
+""" CLI commands.
 """
 # Copyright ©  2015 Jürgen Hermann <jh@web.de>
 #
@@ -17,11 +17,5 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-from gh_commander import __version__ as version
-
-
-def test_semver():
-    """Test a proper semantic version is used."""
-    # TODO Test rules according to PEP440 - Version Identification and Dependency Specification
-    assert len(version.split('.')) == 3, "Semantic version M.m.µ OK"
-    assert all(i.isdigit for i in version.split('.')), "Semantic version parts are numeric"
+# Load the command modules for registration
+from . import help  # noqa pylint: disable=redefined-builtin
