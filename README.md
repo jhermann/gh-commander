@@ -231,6 +231,7 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 **Similar Projects**
 
 * [sigmavirus24/github-cli](https://github.com/sigmavirus24/github-cli)
+* [harshasrinivas/cli-github](https://github.com/harshasrinivas/cli-github)
 
 **Tools**
 
