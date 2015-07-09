@@ -232,6 +232,7 @@ See [CONTRIBUTING](https://github.com/jhermann/gh-commander/blob/master/CONTRIBU
 
 * [sigmavirus24/github-cli](https://github.com/sigmavirus24/github-cli)
 * [harshasrinivas/cli-github](https://github.com/harshasrinivas/cli-github)
+* [github-issues-import](https://github.com/IQAndreas/github-issues-import)
 
 **Tools**
 
