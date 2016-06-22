@@ -29,7 +29,7 @@ import tablib
 # TODO: clear up license situation before a final release, or switch to something else
 import qstatpretty.ttyutil.color as ttycolor
 import qstatpretty.ttyutil.table as ttytable
-import qstatpretty.ttyutil.shrink as ttyshrink
+import qstatpretty.ttyutil.resize as ttyresize
 # import qstatpretty.ttyutil.size as ttysize
 
 from .. import config, github
@@ -49,15 +49,15 @@ DEFAULT_TABLE_FORMAT = [
         'key': 'name',
         'title': 'name',
         'color': lambda x: ttycolor.COLOR_GREEN,
-        'ellipsis': ttyshrink.simple_ellipsis(),
-        'fval': ttyshrink.simple_value(factor=10, overflow=2),
+        'ellipsis': ttyresize.simple_ellipsis(),
+        'fval': ttyresize.simple_value(factor=10, overflow=2),
     },
     {
         'key': 'color',
         'title': 'user',
         'color': lambda x: ttycolor.COLOR_YELLOW,
-        'ellipsis': ttyshrink.simple_ellipsis(),
-        'fval': ttyshrink.simple_value(factor=3),
+        'ellipsis': ttyresize.simple_ellipsis(),
+        'fval': ttyresize.simple_value(factor=3),
     },
 ]
 
@@ -90,10 +90,10 @@ def dump_labels(api, repo):
 
     # terminal_width = ttysize.terminal_size()[0]
     table_format = DEFAULT_TABLE_FORMAT
-    delimiters = ttytable.DELIMITERS_DEFAULT
+    delimiters = ttytable.DELIMITERS_FULL
 
     table = list(data)
-    # table = ttyshrink.grow_table(data, terminal_width, table_format, delimiters)
+    # table = ttyresize.grow_table(data, terminal_width, table_format, delimiters)
     click.secho('⎇   {}/{}'.format(user, repo), fg='white', bg='blue', bold=True)
     click.echo(ttytable.pretty_table(table, table_format, delimiters=delimiters))
 
