@@ -2,8 +2,8 @@
 # Test requirements
 #
 
-pytest==2.7.0
-pytest-spec==0.2.24
-pytest-cov==1.8.1
-coveralls==0.5
+pytest==2.9.2
+pytest-spec==1.0.1
+pytest-cov==2.2.1
+coveralls==1.1
 sh==1.11
