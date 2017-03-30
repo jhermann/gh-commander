@@ -145,7 +145,7 @@ def export(ctx, repo, outfile, serializer):
             serializer = ext
         else:
             raise UsageError('No --format given, and extension of "{}" is not one of {}.'
-                             .format(outname, ', '.join(SERIALIZERS)), ctx=ctx)
+                             .format(outname or '<stream>', ', '.join(SERIALIZERS)), ctx=ctx)
 
     for idx, reponame in enumerate(repo):
         user, repo, data = get_labels(api, reponame)
@@ -164,7 +164,8 @@ def export(ctx, repo, outfile, serializer):
     try:
         outfile.write(text)
     except EnvironmentError as cause:
-        raise dclick.LoggedFailure('Error while writing "{}" ({})'.format(outname, cause))
+        raise dclick.LoggedFailure('Error while writing "{}" ({})'
+                                   .format(outname or '<stream>', cause))
 
 
 @label.command(name='import')
