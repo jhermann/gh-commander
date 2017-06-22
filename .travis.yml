@@ -22,8 +22,7 @@ env:
 
 # command to install dependencies
 install:
-    - "pip install -r dev-requirements.txt"
-    - "python setup.py develop -U"
+    - "pip install -r dev-requirements.txt 'py>=1.4.29'"
 
 # command to run tests
 script: invoke --echo --pty ci
