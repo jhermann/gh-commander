@@ -2,9 +2,9 @@
 
 ![logo](https://raw.githubusercontent.com/jhermann/gh-commander/master/docs/_static/logo-64.png) | *GitHub Commander* is a tool to access the [GitHub API v3](https://developer.github.com/v3/) from the CLI and automate otherwise tedious tasks.
 :----: | :----
-**Project** | [![Groups](https://img.shields.io/badge/Google_groups-gh--commander-orange.svg)](https://groups.google.com/forum/#!forum/gh-commander) [![License](https://img.shields.io/pypi/l/gh-commander.svg)](https://github.com/jhermann/gh-commander/blob/master/LICENSE) [![Development Status](https://img.shields.io/pypi/status/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
+**Project** | [![Groups](https://img.shields.io/badge/Google_groups-gh--commander-orange.svg)](https://groups.google.com/forum/#!forum/gh-commander) [![License](https://img.shields.io/pypi/l/gh-commander.svg)](https://github.com/jhermann/gh-commander/blob/master/LICENSE)
 **QA** | [![Travis CI](https://api.travis-ci.org/jhermann/gh-commander.svg)](https://travis-ci.org/jhermann/gh-commander) [![Coveralls](https://img.shields.io/coveralls/jhermann/gh-commander.svg)](https://coveralls.io/r/jhermann/gh-commander) [![GitHub Issues](https://img.shields.io/github/issues/jhermann/gh-commander.svg)](https://github.com/jhermann/gh-commander/issues)
-**Release** | [![Latest Version](https://img.shields.io/pypi/v/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/) [![Download format](https://img.shields.io/pypi/format/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/) [![Downloads](https://img.shields.io/pypi/dw/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
+**Release** | [![Latest Version](https://img.shields.io/pypi/v/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/) [![Download format](https://img.shields.io/pypi/format/gh-commander.svg)](https://pypi.python.org/pypi/gh-commander/)
 
 
 ## Overview
