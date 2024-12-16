@@ -4,7 +4,7 @@
 
 click==3.3
 colorama==0.3.7
-configobj==5.0.6
+configobj==5.0.9
 #-e git+https://github.com/jhermann/configobj@move-to-package-32#egg=configobj
 
 #github3.py>=1.0
